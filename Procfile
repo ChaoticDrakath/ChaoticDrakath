@@ -1,1 +1,1 @@
-worker: python Slugwrath.py
+worker: python slugwrath.py
