@@ -20,8 +20,8 @@ newUserMessage = """Welcome to Crownsreach. Hope you will be active here. Check 
 @client.event
 async def on_member_join(member):
  print("In our server" + member.name + " joined just joined")
-     await client.send_message(member, newUserMessage)
-     print("Sent message to " + member.name)
+    await client.send_message(member, newUserMessage)
+    print("Sent message to " + member.name)
      
  
  
