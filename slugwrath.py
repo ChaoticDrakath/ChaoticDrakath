@@ -182,7 +182,7 @@ async def unmute(ctx, member: discord.Member):
         await bot.say(embed=embed)
                    
 @client.command(pass_context=True)
-@commands.has_role("Drakath"=True)
+@commands.has_permissions(administrator=True)
 async def ChaorruptedGuard(ctx, user:discord.Member,):
     role = discord.utils.get(ctx.message.server.roles, name='Chaorrupted Guard')
     await client.add_roles(ctx.message.mentions[0], role)
