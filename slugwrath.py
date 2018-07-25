@@ -38,7 +38,7 @@ async def on_member_leave(member):
 @client.command(pass_context = True)
 async def help(ctx):
     author = ctx.message.author
-    embed = discord.Embed(colour = discord.Colour.Purple())
+    embed = discord.Embed(colour = 0x6b009c)
     embed.set_author(name='Help')
     embed.add_field(name = 'help',value ='Explains all the commands',inline = False)
     embed.add_field(name = 'kick(Officers or above.)',value ='Use it like ``Chaos kick @user`` to kick any user',inline = False)
