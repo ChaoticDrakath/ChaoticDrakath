@@ -180,8 +180,11 @@ async def unmute(ctx, member: discord.Member):
      else:
         embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool", color=0xff00f6)
         await bot.say(embed=embed)
-      
-                                                                                                
- 
- 
+                   
+@client.command(pass_context=True)
+@commands.has_permissions(administrator=True)
+async def friend(ctx, user:discord.Member,):
+    role = discord.utils.get(ctx.message.server.roles, name='Friend of Owner')
+    await client.add_roles(ctx.message.mentions[0], role)
+                                                                                                    
 client.run(os.getenv('Token'))
