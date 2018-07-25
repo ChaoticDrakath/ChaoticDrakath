@@ -180,22 +180,16 @@ async def unmute(ctx, member: discord.Member):
      else:
         embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool", color=0xff00f6)
         await client.say(embed=embed)
-                   
-@client.command(pass_context=True)
-@commands.has_permissions(administrator=True)
-async def ChaorruptedGus(ctx, user:discord.Member,):
-    role = discord.utils.get(ctx.message.server.roles, name='Chaorrupted Guard')
-    await client.add_roles(ctx.message.mentions[0], role)
    
 @client.command(pass_context = True)
-async def ChaorruptedGuard(ctx, member: discord.Member):
+async def hire guard(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.administrator:
-        role = discord.utils.get(ctx.message.server.roles, name='Chaorrupted Guard')
-        await client.add_roles(ctx.message.mentions[0], role)
-        embed=discord.Embed(title="Ancient ones have chaorrupted new guard!" description="The ancient ones have Chaorrupted **{0}** to guard!".format(member, ctx.message.author), color=0x6b009c)
+        role = discord.utils.get(member.server.roles, name='Chaorrupted Guard')
+        await client.add_roles(member, role)
+        embed=discord.Embed(title="User Chaorrupted", description="The ancient ones have chaorrupted **{0}**".format(member, ctx.message.author), color=0x6b009c)
         await client.say(embed=embed)
      else:
-        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x6b009c)
+        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool", color=0x6b009c)
         await client.say(embed=embed)
                                                                                                     
 client.run(os.getenv('Token'))
