@@ -182,7 +182,7 @@ async def unmute(ctx, member: discord.Member):
         await client.say(embed=embed)
    
 @client.command(pass_context = True)
-async def hire_guard(ctx, member: discord.Member):
+async def "hire guard"(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.administrator:
         role = discord.utils.get(member.server.roles, name='Chaorrupted Guard')
         await client.add_roles(member, role)
