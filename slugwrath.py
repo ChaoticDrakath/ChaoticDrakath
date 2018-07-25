@@ -35,7 +35,7 @@ async def on_member_leave(member):
      fmt = '{0.mention} just left {1.name}!'
      await client.send_message(server, fmt.format(member, server))
      
-     @client.command(pass_context = True)
+@client.command(pass_context = True)
 async def help(ctx):
     author = ctx.message.author
     embed = discord.Embed(colour = discord.Colour.Purple())
