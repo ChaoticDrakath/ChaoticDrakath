@@ -191,7 +191,7 @@ async def ChaorruptedGus(ctx, user:discord.Member,):
 async def ChaorruptedGuard(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.administrator:
         role = discord.utils.get(ctx.message.server.roles, name='Chaorrupted Guard')
-        await client.add_roles(member)
+        await client.add_roles(ctx.message.mentions[0], role)
         embed=discord.Embed(title="Ancient ones have chaorrupted new guard!" description="The ancient ones have Chaorrupted **{0}** to guard!".format(member, ctx.message.author), color=0x6b009c)
         await client.say(embed=embed)
      else:
