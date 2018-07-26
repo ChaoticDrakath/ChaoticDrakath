@@ -202,5 +202,10 @@ async def hireguard(ctx, member: discord.Member):
      else:
         embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool", color=0x6b009c)
         await client.say(embed=embed)
+        
+@client.command(pass_context=True)
+async def accept(ctx):
+    role = discord.utils.get(ctx.message.server.roles, name='Chaos Hero')
+    await client.add_roles(ctx.message.author, role)
                                                                                                     
 client.run(os.getenv('Token'))
