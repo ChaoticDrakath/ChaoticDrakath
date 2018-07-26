@@ -36,6 +36,17 @@ async def on_member_leave(member):
      await client.send_message(server, fmt.format(member, server))
      
 @client.command(pass_context = True)
+async def whois(ctx, user: discord.Member):
+    embed = discord.Embed(title="{}'s info".format(user.name), description="He/She is", color=0x6b009c)
+    embed.add_field(name="Name", value=user.name, inline=True)
+    embed.add_field(name="ID", value=user.id, inline=True)
+    embed.add_field(name="Status", value=user.status, inline=True)
+    embed.add_field(name="Highest role", value=user.top_role)
+    embed.add_field(name="Joined", value=user.joined_at)
+    embed.set_thumbnail(url=user.avatar_url)
+    await client.say(embed=embed)
+     
+@client.command(pass_context = True)
 async def help(ctx):
     author = ctx.message.author
     embed = discord.Embed(colour = 0x6b009c)
