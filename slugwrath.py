@@ -8,6 +8,7 @@ import os
 client = Bot(description="I corrupt the servers with Chaos", command_prefix="Chaos ", pm_help = True)
 client.remove_command('help')
 newUserMessage = """Welcome to Crownsreach. Hope you will be active here. Check <#452740981666742282>, <#453569407558483968> and <#453189578040541205>."""
+leaveUserMessage = """Chaos is not with you anymore... *Chaotic effect removed*."""
 
 
 @client.event
@@ -26,9 +27,9 @@ async def on_member_join(member):
  
 @client.event
 async def on_member_leave(member):
-    server = member.server
-    fmt = '{0.mention} just left {1.name}!'
-    await client.send_message(server, fmt.format(member, server))
+    print("Reporting member leave" + member.name + "is not Chaotic anymore")
+    await client.send_message(member, leaveUserMessage)
+    print("Sent message to " + member.name)
     
     async def on_member_leave(member):
      server = member.server
@@ -207,5 +208,14 @@ async def hireguard(ctx, member: discord.Member):
 async def accept(ctx):
     role = discord.utils.get(ctx.message.server.roles, name='Chaos Hero')
     await client.add_roles(ctx.message.author, role)
+   
+@client.command(pass_context = True)
+@commands.has_permissions(administrator=True) 
+async def bans(ctx):
+    '''Gets A List Of Users Who Are No Longer With us'''
+    x = await client.get_bans(ctx.message.server)
+    x = '\n'.join([y.name for y in x])
+    embed = discord.Embed(title = "List of The Banned Idiots", description = x, color = 0x6b009c)
+    return await client.say(embed = embed)
                                                                                                     
 client.run(os.getenv('Token'))
