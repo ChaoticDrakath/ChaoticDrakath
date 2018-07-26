@@ -37,7 +37,7 @@ async def on_member_leave(member):
      
 @client.command(pass_context = True)
 async def whois(ctx, user: discord.Member):
-    embed = discord.Embed(title="{}'s info".format(user.name), description="He/She is", color=0x6b009c)
+    embed = discord.Embed(title="{}'s info".format(user.name), description="Info about user.", color=0x6b009c)
     embed.add_field(name="Name", value=user.name, inline=True)
     embed.add_field(name="ID", value=user.id, inline=True)
     embed.add_field(name="Status", value=user.status, inline=True)
