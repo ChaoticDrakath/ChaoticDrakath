@@ -182,8 +182,14 @@ async def hireguard(ctx, member: discord.Member):
         
 @client.command(pass_context=True)
 async def accept(ctx):
-    role = discord.utils.get(ctx.message.server.roles, name='Chaos Hero')
+    role = discord.utils.get(ctx.message.server.roles, name='C')
     await client.add_roles(ctx.message.author, role)
+ 
+@client.command(pass_context=True)
+async def leave(ctx):
+    await client.kick(ctx.message.author)
+   
+ 
    
 @client.command(pass_context = True)
 @commands.has_permissions(administrator=True) 
