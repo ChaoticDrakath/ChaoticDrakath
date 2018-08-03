@@ -37,7 +37,7 @@ async def on_member_leave(member):
      await client.send_message(server, fmt.format(member, server))
      
 @client.event
-async def on_member_join(member):
+async def on_member_join(ctx, member: discord.Member):
     role = discord.utils.get(ctx.message.server.roles, name='UNKNOWN')
     await client.add_roles(member, role)
 
