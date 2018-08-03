@@ -36,6 +36,11 @@ async def on_member_leave(member):
      fmt = '{0.mention} just left {1.name}!'
      await client.send_message(server, fmt.format(member, server))
      
+@client.event
+async def on_member_join(member):
+    await client.add_roles(member, role)
+
+     
 @client.command(pass_context = True)
 async def whois(ctx, user: discord.Member):
     embed = discord.Embed(title="{}'s info".format(user.name), description="Info about user.", color=0x6b009c)
