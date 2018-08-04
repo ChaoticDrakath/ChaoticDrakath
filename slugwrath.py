@@ -106,6 +106,15 @@ async def kick(ctx, member: discord.Member):
      else:
         embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x6b009c)
         await client.say(embed=embed)
+        
+@client.command(pass_context = True)
+async def invite(ctx, member: discord.Member):
+     if ctx.message.author.server_permissions.administrator:     
+        embed=discord.Embed(title="You can invite me using this link!", description="https://discordapp.com/api/oauth2/authorize?client_id=474575162424033280&permissions=8&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D474575162424033280%26permissions%3D8%26redirect_uri%3Dhttps%253A%252F%252Fdiscordapp.com%252Fapi%252Foauth2%252Fauthorize%253Fclient_id%253D&scope=bot", color=0x6b009c)
+        await client.say(embed=embed)
+     else:
+        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x6b009c)
+        await client.say(embed=embed)
          
   
 @client.command(pass_context = True)
@@ -199,12 +208,6 @@ async def bans(ctx):
     x = '\n'.join([y.name for y in x])
     embed = discord.Embed(title = "List of The Banned Idiots", description = x, color = 0x6b009c)
     return await client.say(embed = embed)
-   
- @client.command(pass_context = True)
- @commands.has_role('匚卄卂ㄖ尺尺ㄩ卩ㄒ乇刀 ムㄖ刀!'=True)
- async def invite(ctx):
-     embed=discord.Embed(title="You can invite me using this link!", description="https://discordapp.com/api/oauth2/authorize?client_id=474575162424033280&permissions=8&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D474575162424033280%26permissions%3D8%26redirect_uri%3Dhttps%253A%252F%252Fdiscordapp.com%252Fapi%252Foauth2%252Fauthorize%253Fclient_id%253D&scope=bot", color=0x6b009c)
-     await client.say(embed=embed) 
 
                                                                                                     
 client.run(os.getenv('Token'))
