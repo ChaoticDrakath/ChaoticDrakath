@@ -237,7 +237,7 @@ async def setup(ctx):
     author = ctx.message.author
     server = ctx.message.server
     mod_perms = discord.Permissions(administrator=True)
-    await client.create_role(author.server, name="Owner", permissions=perms)
+    await client.create_role(author.server, name="Owner", permissions=administrator)
     await client.create_role(author.server, name="Admin")
     await client.create_role(author.server, name="G.O.H")
     await client.create_role(author.server, name="Moderator")
