@@ -7,7 +7,7 @@ import colorsys
 import random
 import os
 
-client = Bot(command_prefix="d!", pm_help = True)
+client = Bot(command_prefix="Chaos ", pm_help = True)
 client.remove_command('help')
 
 
