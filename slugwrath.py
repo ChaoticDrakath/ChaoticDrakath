@@ -7,7 +7,9 @@ import os
  
 client = Bot(description="I corrupt the servers with Chaos", command_prefix="Chaos ", pm_help = True)
 client.remove_command('help')
+
 newUserMessage = """Welcome to Crownsreach. Chaos is with you! Check <#452740981666742282>, <#453569407558483968> and <#453189578040541205>. *Chaotic effect added*"""
+
 leaveUserMessage = """Chaos is not with you anymore... *Chaotic effect removed*."""
 
 
@@ -31,13 +33,14 @@ async def on_member_leave(member):
     await client.send_message(member, leaveUserMessage)
     print("Sent message to " + member.name)
     
-    async def on_member_leave(member):
-     server = member.server
-     fmt = '{0.mention} just left {1.name}!'
-     await client.send_message(server, fmt.format(member, server))
+@client.event
+async def on_member_leave(member):
+    server = member.server
+    fmt = '{0.mention} just left {1.name}!'
+    await client.send_message(server, fmt.format(member, leaveUserMessage))
      
 @client.command(pass_context = True)
-async def whois(ctx, user: discord.Member):
+async def eye(ctx, user: discord.Member):
     embed = discord.Embed(title="{}'s info".format(user.name), description="Info about user.", color=0x6b009c)
     embed.add_field(name="Name", value=user.name, inline=True)
     embed.add_field(name="ID", value=user.id, inline=True)
@@ -66,7 +69,7 @@ async def help(ctx):
       
 @client.command(pass_context = True)
 @commands.has_permissions(send_messages=True)
-async def say(ctx, *, msg = None):
+async def speak(ctx, *, msg = None):
     await client.delete_message(ctx.message)
  
     if not msg: await client.say("Please specify a message to send")
@@ -75,7 +78,7 @@ async def say(ctx, *, msg = None):
 
 @client.command(pass_context = True)
 @commands.has_permissions(mute_members=True)
-async def warndm(ctx, member: discord.Member):
+async def warn(ctx, member: discord.Member):
     await client.delete_message(ctx.message)
     await client.send_message(member, 'Please Read <#Rules> and never break any one of them again otherwise i will mute/kick/ban you next time.')
     return
@@ -98,10 +101,10 @@ async def ban(ctx, member: discord.Member):
         await client.say(embed=embed)   	 		 		  
      
 @client.command(pass_context = True)
-async def kick(ctx, member: discord.Member):
+async def boot(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.kick_members:
         await client.kick(member)
-        embed=discord.Embed(title="User Kicked!", description="The ancient ones have Kicked **{0}** #rules, to see the rules!)".format(member, ctx.message.author), color=0x6b009c)
+        embed=discord.Embed(title="User booted!", description="The ancient ones have Kicked **{0}** #rules, to see the rules!)".format(member, ctx.message.author), color=0x6b009c)
         await client.say(embed=embed)
      else:
         embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x6b009c)
@@ -130,7 +133,7 @@ async def clear(ctx, number):
 @commands.has_permissions(send_messages=True)     
 
 async def serverinfo(ctx):
-    '''Displays Info About The Server!'''
+    '''Chaos minion is getting info for ya!'''
 
     server = ctx.message.server
     roles = [x.name for x in server.role_hierarchy]
@@ -157,7 +160,7 @@ async def serverinfo(ctx):
  
        
 @client.command(pass_context = True)
-async def mute(ctx, member: discord.Member):
+async def ducttape(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.mute_members:
         role = discord.utils.get(member.server.roles, name='Muted')
         await client.add_roles(member, role)
@@ -168,7 +171,7 @@ async def mute(ctx, member: discord.Member):
         await client.say(embed=embed)
           
 @client.command(pass_context = True)
-async def unmute(ctx, member: discord.Member):
+async def untape(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.mute_members:
         role = discord.utils.get(member.server.roles, name='Muted')
         await client.remove_roles(member, role)
@@ -177,21 +180,10 @@ async def unmute(ctx, member: discord.Member):
      else:
         embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool", color=0x6b009c)
         await client.say(embed=embed)
-   
-@client.command(pass_context = True)
-async def hireguard(ctx, member: discord.Member):
-     if ctx.message.author.server_permissions.administrator:
-        role = discord.utils.get(member.server.roles, name='Chaorrupted Guard')
-        await client.add_roles(member, role)
-        embed=discord.Embed(title="User Chaorrupted", description="The ancient ones have chaorrupted **{0}**".format(member, ctx.message.author), color=0x6b009c)
-        await client.say(embed=embed)
-     else:
-        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool", color=0x6b009c)
-        await client.say(embed=embed)
         
 @client.command(pass_context=True)
 async def accept(ctx):
-    role = discord.utils.get(ctx.message.server.roles, name='C')
+    role = discord.utils.get(ctx.message.server.roles, name='Chaotic')
     await client.add_roles(ctx.message.author, role)
  
 @client.command(pass_context=True)
@@ -238,5 +230,19 @@ async def setup(ctx):
     await client.create_channel(server, 'private_chat',private)
     await client.create_channel(server, 'Music Zone', type=discord.ChannelType.voice)
     await client.create_channel(server, 'music_commands',user)
+    
+@client.command(pass_context = True)
+@commands.has_permissions(manage_roles=True)     
+async def role(ctx, user: discord.Member, *, role: discord.Role = None):
+        if role is None:
+            return await client.say("My minions can't find role like that! ")
+
+        if role not in user.roles:
+            await client.add_roles(user, role)
+            return await client.say("Chaotic Minions gave {} to {}.".format(role, user))
+
+        if role in user.roles:
+            await client.remove_roles(user, role)
+            return await client.say("{} My minions took away role {}!".format(user, role))
                                                                                                     
 client.run(os.getenv('Token'))
