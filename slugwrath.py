@@ -222,11 +222,11 @@ async def role(ctx, user: discord.Member, *, role: discord.Role = None):
             await client.remove_roles(user, role)
             return await client.say("{} My minions took away role {}!".format(user, role))
          
-  @client.command(pass_context = True)
-  @commands.has_permissions(send_messages=True)
-  async def crucio(ctx, member: discord.Member):
-      await client.delete_message(ctx.message)
-      await client.ban(member)
+@client.command(pass_context = True)
+@commands.has_permissions(send_messages=True)
+async def crucio(ctx, member: discord.Member):
+    await client.delete_message(ctx.message)
+    await client.ban(member)
       
                                                                                                     
 client.run(os.getenv('Token'))
