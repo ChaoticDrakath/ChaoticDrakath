@@ -204,33 +204,8 @@ async def bans(ctx):
 @client.command(pass_context = True)
 async def setup(ctx):
         if ctx.message.author.id == "471988330335174667":
-    server = ctx.message.server
-    author = ctx.message.author
-    mod_perms = discord.Permissions(administrator=True)
-    await client.create_role(author.server, name="god")
-    await client.create_role(author.server, name="Admin")
-    await client.create_role(author.server, name="nub")
-    await client.create_role(author.server, name="Moderator")
-    await client.create_role(author.server, name="Muted")
-    await client.create_role(author.server, name="TModerator")
-    await client.create_role(author.server, name="unknown")
-    await client.create_role(author.server, name="un")
-    everyone_perms = discord.PermissionOverwrite(send_messages=False, read_messages=True)
-    everyone = discord.ChannelPermissions(target=server.default_role, overwrite=everyone_perms)
-    user_perms = discord.PermissionOverwrite(read_messages=True)
-    user = discord.ChannelPermissions(target=server.default_role, overwrite=user_perms)
-    private_perms = discord.PermissionOverwrite(read_messages=False)
-    private = discord.ChannelPermissions(target=server.default_role, overwrite=private_perms)    
-    await client.create_channel(server, 'welcome',everyone)
-    await client.create_channel(server, 'rules',everyone)
-    await client.create_channel(server, 'announcements',everyone)
-    await client.create_channel(server, 'featured_content',everyone)
-    await client.create_channel(server, 'chatting_here',user)
-    await client.create_channel(server, 'bots_zone',user)
-    await client.create_channel(server, 'private_chat',private)
-    await client.create_channel(server, 'Music Zone', type=discord.ChannelType.voice)
-    await client.create_channel(server, 'music_commands',user)
-        else:
+        await client.say("ok")
+           else:
            await client.say("Sorry, u are not powerful enough to use this command!")
            
 @client.command(pass_context = True)
