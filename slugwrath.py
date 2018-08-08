@@ -5,21 +5,21 @@ from discord.ext import commands
 import platform
 import os
  
-client = Bot(description="I corrupt the servers with Chaos", command_prefix="Chaos ", pm_help = True)
+client = Bot(description="I corrupt the servers with Chaos", command_prefix="", pm_help = True)
 client.remove_command('help')
 
-newUserMessage = """Welcome to Crownsreach. Chaos is with you! Check <#452740981666742282>, <#453569407558483968> and <#453189578040541205>. *Chaotic effect added*"""
+newUserMessage = """Welcome to Hogwarts. Hogwarts is with you! Check <#452740981666742282>, <#453569407558483968> and <#453189578040541205>. *Wizard/Witch effect added*"""
 
-leaveUserMessage = """Chaos is not with you anymore... *Chaotic effect removed*."""
+leaveUserMessage = """Hogwarts is not with you anymore... *Wizard/Witch effect removed*."""
 
 
 @client.event
 async def on_ready():
     print('Logged in as '+client.user.name+' (ID:'+client.user.id+') | Connected to '+str(len(client.servers))+' servers | Connected to '+str(len(set(client.get_all_members())))+' users')
     print('--------------------------------------')
-    print('Successfully Summoned Chaos!')
-    print('Long Live Chaos!')
-    return await client.change_presence(game=discord.Game(name='Youtube with Drakath#3722'))
+    print('Successfully Learned Spells/Curses!')
+    print('Long Live Wizards!')
+    return await client.change_presence(game=discord.Game(name='With Spells/Curses.'))
      
 @client.event
 async def on_member_join(member):
@@ -29,7 +29,7 @@ async def on_member_join(member):
  
 @client.event
 async def on_member_leave(member):
-    print("Reporting member leave" + member.name + "is not Chaotic anymore")
+    print("Reporting member leave" + member.name + "is not Wizard/Witch anymore")
     await client.send_message(member, leaveUserMessage)
     print("Sent message to " + member.name)
     
@@ -41,7 +41,7 @@ async def on_member_leave(member):
      
 @client.command(pass_context = True)
 async def eye(ctx, user: discord.Member):
-    embed = discord.Embed(title="{}'s info".format(user.name), description="Info about user.", color=0x6b009c)
+    embed = discord.Embed(title="{}'s info".format(user.name), description="Info about user.", color=0x000000)
     embed.add_field(name="Name", value=user.name, inline=True)
     embed.add_field(name="ID", value=user.id, inline=True)
     embed.add_field(name="Status", value=user.status, inline=True)
@@ -53,7 +53,7 @@ async def eye(ctx, user: discord.Member):
 @client.command(pass_context = True)
 async def help(ctx):
     author = ctx.message.author
-    embed = discord.Embed(colour = 0x6b009c)
+    embed = discord.Embed(colour = 0x000000)
     embed.set_author(name='Help')
     embed.add_field(name = 'help',value ='Explains all the commands',inline = False)
     embed.add_field(name = 'kick(<@&474620468947582996> or above.)',value ='Use it like ``Chaos kick @user`` to kick any user',inline = False)
@@ -69,7 +69,7 @@ async def help(ctx):
       
 @client.command(pass_context = True)
 @commands.has_permissions(send_messages=True)
-async def speak(ctx, *, msg = None):
+async def say(ctx, *, msg = None):
     await client.delete_message(ctx.message)
  
     if not msg: await client.say("Please specify a message to send")
@@ -85,7 +85,7 @@ async def warn(ctx, member: discord.Member):
  
 @client.command(pass_context = True)
 @commands.has_permissions(administrator=True)
-async def dm(ctx, member: discord.Member , msg = None):
+async def tellto(ctx, member: discord.Member , msg = None):
     await client.delete_message(ctx.message)
     await client.send_message(member, msg)
     return
@@ -94,29 +94,29 @@ async def dm(ctx, member: discord.Member , msg = None):
 async def ban(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.ban_members:
         await client.ban(member)
-        embed=discord.Embed(title="User Banned!", description="The ancient ones have banned **{0}** #rules, to see the rules!)".format(member, ctx.message.author), color=0x6b009c)
+        embed=discord.Embed(title="User Banned!", description="The ancient ones have banned **{0}** #rules, to see the rules!)".format(member, ctx.message.author), color=0x000000)
         await client.say(embed=embed)
      else:
-        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x6b009c)
+        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x000000)
         await client.say(embed=embed)   	 		 		  
      
 @client.command(pass_context = True)
 async def boot(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.kick_members:
         await client.kick(member)
-        embed=discord.Embed(title="User booted!", description="The ancient ones have Kicked **{0}** #rules, to see the rules!)".format(member, ctx.message.author), color=0x6b009c)
+        embed=discord.Embed(title="User booted!", description="The ancient ones have Kicked **{0}** #rules, to see the rules!)".format(member, ctx.message.author), color=0x000000)
         await client.say(embed=embed)
      else:
-        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x6b009c)
+        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x000000)
         await client.say(embed=embed)
         
 @client.command(pass_context = True)
 async def invite(ctx):
      if ctx.message.author.server_permissions.administrator:     
-        embed=discord.Embed(title="You can invite me using this link!", description="https://discordapp.com/api/oauth2/authorize?client_id=474575162424033280&permissions=8&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D474575162424033280%26permissions%3D8%26redirect_uri%3Dhttps%253A%252F%252Fdiscordapp.com%252Fapi%252Foauth2%252Fauthorize%253Fclient_id%253D&scope=bot", color=0x6b009c)
+        embed=discord.Embed(title="You can invite me using this link!", description="https://discordapp.com/api/oauth2/authorize?client_id=474575162424033280&permissions=8&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D474575162424033280%26permissions%3D8%26redirect_uri%3Dhttps%253A%252F%252Fdiscordapp.com%252Fapi%252Foauth2%252Fauthorize%253Fclient_id%253D&scope=bot", color=0x000000)
         await client.say(embed=embed)
      else:
-        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x6b009c)
+        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x000000)
         await client.say(embed=embed)
          
   
@@ -133,7 +133,7 @@ async def clear(ctx, number):
 @commands.has_permissions(send_messages=True)     
 
 async def serverinfo(ctx):
-    '''Chaos minion is getting info for ya!'''
+    '''Hogwarts is Wizardly!'''
 
     server = ctx.message.server
     roles = [x.name for x in server.role_hierarchy]
@@ -144,10 +144,10 @@ async def serverinfo(ctx):
         roles.append('>>>> Displaying[50/%s] Roles'%len(roles))
 
     roles = ', '.join(roles);
-    channelz = len(server.channels);
+    channels = len(server.channels);
     time = str(server.created_at); time = time.split(' '); time= time[0];
 
-    join = discord.Embed(description= '%s '%(str(server)),title = 'Server Name', colour = 0x6b009c);
+    join = discord.Embed(description= '%s '%(str(server)),title = 'Server Name', colour = 0x000000);
     join.set_thumbnail(url = server.icon_url);
     join.add_field(name = '__Owner__', value = str(server.owner) + '\n' + server.owner.id);
     join.add_field(name = '__ID__', value = str(server.id))
@@ -183,7 +183,7 @@ async def untape(ctx, member: discord.Member):
         
 @client.command(pass_context=True)
 async def accept(ctx):
-    role = discord.utils.get(ctx.message.server.roles, name='Chaotic')
+    role = discord.utils.get(ctx.message.server.roles, name='')
     await client.add_roles(ctx.message.author, role)
  
 @client.command(pass_context=True)
@@ -204,6 +204,7 @@ async def bans(ctx):
 @client.command(pass_context = True)
 @commands.has_permissions(administrator=True)
 async def setup(ctx):
+        if ctx.message.author_username=('Voldemort#6460' = True)
     author = ctx.message.author
     server = ctx.message.server
     mod_perms = discord.Permissions(administrator=True)
@@ -230,7 +231,9 @@ async def setup(ctx):
     await client.create_channel(server, 'private_chat',private)
     await client.create_channel(server, 'Music Zone', type=discord.ChannelType.voice)
     await client.create_channel(server, 'music_commands',user)
-    
+        else:
+           await client.say("Sorry, u are not powerful enough to use this command!")
+           
 @client.command(pass_context = True)
 @commands.has_permissions(manage_roles=True)     
 async def role(ctx, user: discord.Member, *, role: discord.Role = None):
