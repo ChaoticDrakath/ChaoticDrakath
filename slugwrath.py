@@ -5,7 +5,7 @@ from discord.ext import commands
 import platform
 import os
  
-client = Bot(description="I corrupt the servers with Chaos", command_prefix="Spell ", pm_help = True)
+client = Bot(description="I am spell.", command_prefix="Spell ", pm_help = True)
 client.remove_command('help')
 
 newUserMessage = """Welcome to Hogwarts. Hogwarts is with you! Check <#452740981666742282>, <#453569407558483968> and <#453189578040541205>. *Wizard/Witch effect added*"""
@@ -40,7 +40,7 @@ async def on_member_leave(member):
     await client.send_message(server, fmt.format(member, leaveUserMessage))
      
 @client.command(pass_context = True)
-async def eye(ctx, user: discord.Member):
+async def whois(ctx, user: discord.Member):
     embed = discord.Embed(title="{}'s info".format(user.name), description="Info about user.", color=0x000000)
     embed.add_field(name="Name", value=user.name, inline=True)
     embed.add_field(name="ID", value=user.id, inline=True)
@@ -91,10 +91,10 @@ async def tellto(ctx, member: discord.Member , msg = None):
     return
  
 @client.command(pass_context = True)
-async def ban(ctx, member: discord.Member):
+async def Avada kedavra(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.ban_members:
         await client.ban(member)
-        embed=discord.Embed(title="User Banned!", description="The ancient ones have banned **{0}** #rules, to see the rules!)".format(member, ctx.message.author), color=0x000000)
+        embed=discord.Embed(title="**{1}** used Avada Kedavra on **{0}**!", description="The ancient ones have banned **{0}** #rules, to see the rules!)".format(member, ctx.message.author), color=0x000000)
         await client.say(embed=embed)
      else:
         embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x000000)
