@@ -204,8 +204,8 @@ async def bans(ctx):
 @client.command(pass_context = True)
 async def setup(ctx):
         if ctx.message.author.id == "471988330335174667":
-        await client.say("ok")
-           else:
+           await client.say("ok")
+        else:
            await client.say("Sorry, u are not powerful enough to use this command!")
            
 @client.command(pass_context = True)
