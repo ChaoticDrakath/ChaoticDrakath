@@ -5,7 +5,7 @@ from discord.ext import commands
 import platform
 import os
  
-client = Bot(description="I corrupt the servers with Chaos", command_prefix="", pm_help = True)
+client = Bot(description="I corrupt the servers with Chaos", command_prefix=" ", pm_help = True)
 client.remove_command('help')
 
 newUserMessage = """Welcome to Hogwarts. Hogwarts is with you! Check <#452740981666742282>, <#453569407558483968> and <#453189578040541205>. *Wizard/Witch effect added*"""
