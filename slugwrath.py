@@ -91,7 +91,7 @@ async def tellto(ctx, member: discord.Member , msg = None):
     return
  
 @client.command(pass_context = True)
-async def Avada kedavra(ctx, member: discord.Member):
+async def Avadakedavra(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.ban_members:
         await client.ban(member)
         embed=discord.Embed(title="**{1}** used Avada Kedavra on **{0}**!", description="The ancient ones have banned **{0}** #rules, to see the rules!)".format(member, ctx.message.author), color=0x000000)
