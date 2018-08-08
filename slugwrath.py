@@ -204,7 +204,7 @@ async def bans(ctx):
 @client.command(pass_context = True)
 @commands.has_permissions(administrator=True)
 async def setup(ctx):
-        if ctx.message.author_username = ('Voldemort#6460' = True)
+        if ctx.message.author.id == "471988330335174667":
     author = ctx.message.author
     server = ctx.message.server
     mod_perms = discord.Permissions(administrator=True)
