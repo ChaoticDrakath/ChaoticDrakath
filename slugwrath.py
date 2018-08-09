@@ -23,9 +23,12 @@ async def on_ready():
      
 @client.event
 async def on_member_join(member):
-    print("In our server" + member.name + " joined just joined")
-    await client.send_message(member, newUserMessage)
-    print("Sent message to " + member.name)
+     
+    if member.server.id == "450901954105966592":
+    
+       print("In our server" + member.name + " joined just joined")
+       await client.send_message(member, newUserMessage)
+       print("Sent message to " + member.name)
  
 @client.event
 async def on_member_leave(member):
@@ -221,12 +224,7 @@ async def role(ctx, user: discord.Member, *, role: discord.Role = None):
         if role in user.roles:
             await client.remove_roles(user, role)
             return await client.say("{} My minions took away role {}!".format(user, role))
-         
-@client.command(pass_context = True)
-@commands.has_permissions(send_messages=True)
-async def crucio(ctx, member: discord.Member):
-    await client.delete_message(ctx.message)
-    await client.ban(member)
-      
+        
+ 
                                                                                                     
 client.run(os.getenv('Token'))
