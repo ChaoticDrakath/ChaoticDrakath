@@ -66,7 +66,7 @@ async def book(ctx):
     embed.add_field(name = 'avadakedavra(<@&474619905275199513> or above.) ',value ='Use it like ``spell avadakedarva @user`` to ban any user',inline = False)
     embed.add_field(name = 'warn(mods)(Mute_members permission.)',value ='Use it like ``spell warndm @user <violation type in one word>`` to warn any user in dm',inline = False)
     embed.add_field(name = 'imperio (everyone.)',value ='Use it like ``spell imperio <message here>`` to make bot say message.',inline = False)
-    embed.add_field(name = 'bans (Only those who are powerful enough'),value ='use it like ``spell bans```',inline = False)
+    embed.add_field(name = 'bans (Only those who are powerful enough)',value ='use it like ``spell bans``',inline = False)
     await client.send_message(author,embed=embed)
       
 @client.command(pass_context = True)
