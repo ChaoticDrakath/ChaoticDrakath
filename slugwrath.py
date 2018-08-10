@@ -5,7 +5,7 @@ from discord.ext import commands
 import platform
 import os
  
-client = Bot(description="I am spell.", command_prefix="Spell ", pm_help = True)
+client = Bot(description="I am wand.", command_prefix="Spell ", pm_help = True)
 client.remove_command('help')
 
 newUserMessage = """Welcome to Hogwarts. Hogwarts is with you! Check <#452740981666742282>, <#453569407558483968> and <#453189578040541205>. *Wizard/Witch effect added*"""
@@ -54,7 +54,7 @@ async def whois(ctx, user: discord.Member):
     await client.say(embed=embed)
      
 @client.command(pass_context = True)
-async def help(ctx):
+async def book(ctx):
     author = ctx.message.author
     embed = discord.Embed(colour = 0x000000)
     embed.set_author(name='Help')
@@ -72,7 +72,7 @@ async def help(ctx):
       
 @client.command(pass_context = True)
 @commands.has_permissions(send_messages=True)
-async def say(ctx, *, msg = None):
+async def imperio(ctx, *, msg = None):
     await client.delete_message(ctx.message)
  
     if not msg: await client.say("Please specify a message to send")
@@ -104,7 +104,7 @@ async def Avadakedavra(ctx, member: discord.Member):
         await client.say(embed=embed)   	 		 		  
      
 @client.command(pass_context = True)
-async def boot(ctx, member: discord.Member):
+async def expelliarmus(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.kick_members:
         await client.kick(member)
         embed=discord.Embed(title="User booted!", description="The ancient ones have Kicked **{0}** #rules, to see the rules!)".format(member, ctx.message.author), color=0x000000)
@@ -163,7 +163,7 @@ async def serverinfo(ctx):
  
        
 @client.command(pass_context = True)
-async def ducttape(ctx, member: discord.Member):
+async def crucio(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.mute_members:
         role = discord.utils.get(member.server.roles, name='Muted')
         await client.add_roles(member, role)
@@ -174,7 +174,7 @@ async def ducttape(ctx, member: discord.Member):
         await client.say(embed=embed)
           
 @client.command(pass_context = True)
-async def untape(ctx, member: discord.Member):
+async def uncrucio(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.mute_members:
         role = discord.utils.get(member.server.roles, name='Muted')
         await client.remove_roles(member, role)
