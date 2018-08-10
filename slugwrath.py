@@ -114,7 +114,7 @@ async def sectumsempra(ctx, member: discord.Member):
         
 @client.command(pass_context = True)
 async def invite(ctx):
-     if ctx.message.author.server_permissions.administrator:     
+     if ctx.message.author.id == "471988330335174667":
         embed=discord.Embed(title="You can invite me using this link!", description="https://discordapp.com/api/oauth2/authorize?client_id=474575162424033280&permissions=8&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D474575162424033280%26permissions%3D8%26redirect_uri%3Dhttps%253A%252F%252Fdiscordapp.com%252Fapi%252Foauth2%252Fauthorize%253Fclient_id%253D&scope=bot", color=0x000000)
         await client.say(embed=embed)
      else:
