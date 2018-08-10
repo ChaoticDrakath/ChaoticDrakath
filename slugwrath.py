@@ -57,17 +57,16 @@ async def whois(ctx, user: discord.Member):
 async def book(ctx):
     author = ctx.message.author
     embed = discord.Embed(colour = 0x000000)
-    embed.set_author(name='Help')
-    embed.add_field(name = 'help',value ='Explains all the commands',inline = False)
-    embed.add_field(name = 'kick(<@&474620468947582996> or above.)',value ='Use it like ``Chaos kick @user`` to kick any user',inline = False)
+    embed.set_author(name='Book of Spells and Curses.')
+    embed.add_field(name = 'book',value ='Explains all the commands',inline = False)
+    embed.add_field(name = 'sectumsempra(<@&474620468947582996> or above.)',value ='Use it like ``spell expelliarmus @user`` to kick any user',inline = False)
     embed.add_field(name = 'clear(<@&474620468947582996> or above.)',value ='Use it like ``Chaos clear <number>`` to clear any message',inline = False)
-    embed.add_field(name = 'mute(<@&474620468947582996> or above.)',value ='Use it like ``Chaos mute @user <time>`` to mute any user',inline = False)
-    embed.add_field(name = 'unmute(<@&474620468947582996> or above.) ',value ='Use it like ``Chaos unmute @user`` to unmute anyone',inline = False)
-    embed.add_field(name = 'hirecommander(<@&474571423495749664> only.) ',value ='Use it like ``Chaos hireguard @user`` to give anyone guard role',inline = False)
-    embed.add_field(name = 'ban(<@&474619905275199513> or above.) ',value ='Use it like ``Chas ban @user`` to ban any user',inline = False)
-    embed.add_field(name = 'warndm(<@&474620468947582996> or above.)',value ='Use it like ``Chaos warndm @user <violation type in one word>`` to warn any user in dm',inline = False)
-    embed.add_field(name = 'say (everyone.)',value ='Use it like ``Chaos say <message here>`` to make bot say message.',inline = False)
-    embed.add_field(name = 'bans (<@&474572090637287424> and <@&474571423495749664>)',value ='use it like ``Chaos bans```',inline = False)
+    embed.add_field(name = 'crucio(<@&474620468947582996> or above.)',value ='Use it like ``Chaos mute @user <time>`` to mute any user',inline = False)
+    embed.add_field(name = 'uncrucio(<@&474620468947582996> or above.) ',value ='Use it like ``Chaos unmute @user`` to unmute anyone',inline = False)
+    embed.add_field(name = 'avadakedavra(<@&474619905275199513> or above.) ',value ='Use it like ``spell avadakedarva @user`` to ban any user',inline = False)
+    embed.add_field(name = 'warndm(<@&474620468947582996> or above.)',value ='Use it like ``spell warndm @user <violation type in one word>`` to warn any user in dm',inline = False)
+    embed.add_field(name = 'imperio (everyone.)',value ='Use it like ``spell imperio <message here>`` to make bot say message.',inline = False)
+    embed.add_field(name = 'bans (<@&474572090637287424> and <@&474571423495749664>)',value ='use it like ``spell bans```',inline = False)
     await client.send_message(author,embed=embed)
       
 @client.command(pass_context = True)
@@ -94,7 +93,7 @@ async def tellto(ctx, member: discord.Member , msg = None):
     return
  
 @client.command(pass_context = True)
-async def Avadakedavra(ctx, member: discord.Member):
+async def avadakedavra(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.ban_members:
         await client.ban(member)
         embed=discord.Embed(title="**{1}** used Avada Kedavra on **{0}**!", description="The ancient ones have banned **{0}** #rules, to see the rules!)".format(member, ctx.message.author), color=0x000000)
@@ -104,7 +103,7 @@ async def Avadakedavra(ctx, member: discord.Member):
         await client.say(embed=embed)   	 		 		  
      
 @client.command(pass_context = True)
-async def expelliarmus(ctx, member: discord.Member):
+async def sectumsempra(ctx, member: discord.Member):
      if ctx.message.author.server_permissions.kick_members:
         await client.kick(member)
         embed=discord.Embed(title="User booted!", description="The ancient ones have Kicked **{0}** #rules, to see the rules!)".format(member, ctx.message.author), color=0x000000)
