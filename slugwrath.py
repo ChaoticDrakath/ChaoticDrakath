@@ -5,7 +5,7 @@ from discord.ext import commands
 import platform
 import os
  
-client = Bot(description="I am wand.", command_prefix="Spell ", pm_help = True)
+client = Bot(description="I am wand.", command_prefix="spell ", pm_help = True)
 client.remove_command('help')
 
 newUserMessage = """Welcome to Hogwarts. Hogwarts is with you! Check <#452740981666742282>, <#453569407558483968> and <#453189578040541205>. *Wizard/Witch effect added*"""
@@ -60,13 +60,13 @@ async def book(ctx):
     embed.set_author(name='Book of Spells and Curses.')
     embed.add_field(name = 'book',value ='Explains all the commands',inline = False)
     embed.add_field(name = 'sectumsempra(<@&474620468947582996> or above.)',value ='Use it like ``spell expelliarmus @user`` to kick any user',inline = False)
-    embed.add_field(name = 'clear(<@&474620468947582996> or above.)',value ='Use it like ``Chaos clear <number>`` to clear any message',inline = False)
-    embed.add_field(name = 'crucio(<@&474620468947582996> or above.)',value ='Use it like ``Chaos mute @user <time>`` to mute any user',inline = False)
-    embed.add_field(name = 'uncrucio(<@&474620468947582996> or above.) ',value ='Use it like ``Chaos unmute @user`` to unmute anyone',inline = False)
+    embed.add_field(name = 'clear(<@&474620468947582996> or above.)',value ='Use it like ``spell clear <number>`` to clear any message',inline = False)
+    embed.add_field(name = 'crucio(<@&474620468947582996> or above.)',value ='Use it like ``spell mute @user <time>`` to mute any user',inline = False)
+    embed.add_field(name = 'uncrucio(<@&474620468947582996> or above.) ',value ='Use it like ``spell unmute @user`` to unmute anyone',inline = False)
     embed.add_field(name = 'avadakedavra(<@&474619905275199513> or above.) ',value ='Use it like ``spell avadakedarva @user`` to ban any user',inline = False)
-    embed.add_field(name = 'warndm(<@&474620468947582996> or above.)',value ='Use it like ``spell warndm @user <violation type in one word>`` to warn any user in dm',inline = False)
+    embed.add_field(name = 'warn(mods)(Mute_members permission.)',value ='Use it like ``spell warndm @user <violation type in one word>`` to warn any user in dm',inline = False)
     embed.add_field(name = 'imperio (everyone.)',value ='Use it like ``spell imperio <message here>`` to make bot say message.',inline = False)
-    embed.add_field(name = 'bans (<@&474572090637287424> and <@&474571423495749664>)',value ='use it like ``spell bans```',inline = False)
+    embed.add_field(name = 'bans (Only those who are powerful enough'),value ='use it like ``spell bans```',inline = False)
     await client.send_message(author,embed=embed)
       
 @client.command(pass_context = True)
