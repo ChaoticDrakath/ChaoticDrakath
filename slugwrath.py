@@ -204,7 +204,7 @@ async def bans(ctx):
     return await client.say(embed = embed)
    
 @client.command(pass_context = True)
-async def setup(ctx):
+async def setuup(ctx):
         if ctx.message.author.id == "471988330335174667":
            await client.say("ok")
         else:
