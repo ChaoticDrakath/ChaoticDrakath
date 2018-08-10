@@ -154,7 +154,7 @@ async def serverinfo(ctx):
     join.add_field(name = '__Owner__', value = str(server.owner) + '\n' + server.owner.id);
     join.add_field(name = '__ID__', value = str(server.id))
     join.add_field(name = '__Member Count__', value = str(server.member_count));
-    join.add_field(name = '__Text/Voice Channels__', value = str(channel));
+    join.add_field(name = '__Text/Voice Channels__', value = str(channels));
     join.add_field(name = '__Roles (%s)__'%str(role_length), value = roles);
     join.set_footer(text ='Created: %s'%time);
 
