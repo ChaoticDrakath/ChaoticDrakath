@@ -3,6 +3,8 @@ import asyncio
 from discord.ext.commands import Bot
 from discord.ext import commands
 import platform
+import colorsys
+import random
 import os
  
 client = Bot(description="I am wand.", command_prefix="spell ", pm_help = True)
