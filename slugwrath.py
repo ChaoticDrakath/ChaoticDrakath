@@ -8,10 +8,6 @@ import os
 client = Bot(description="I am wand.", command_prefix="spell ", pm_help = True)
 client.remove_command('help')
 
-newUserMessage = """Welcome to Hogwarts. Hogwarts is with you! Check <#452740981666742282>, <#453569407558483968> and <#453189578040541205>. *Wizard/Witch effect added*"""
-
-leaveUserMessage = """Hogwarts is not with you anymore... *Wizard/Witch effect removed*."""
-
 
 @client.event
 async def on_ready():
@@ -23,25 +19,20 @@ async def on_ready():
      
 @client.event
 async def on_member_join(member):
-     
-    if member.server.id == "450901954105966592":
+   
+   if member.server.id == "450901954105966592":
     
-       print("In our server" + member.name + " joined just joined")
-       await client.send_message(member, newUserMessage)
-       print("Sent message to " + member.name)
- 
-@client.event
-async def on_member_leave(member):
-    print("Reporting member leave" + member.name + "is not Wizard/Witch anymore")
-    await client.send_message(member, leaveUserMessage)
+
+    print("In our server" + member.name + " just joined")
+    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
+    embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
+    embed.set_author(name='Welcome message')
+    embed.add_field(name = '__Welcome to Our Server__',value ='**Hope you will be active here. Check Our server rules and never try to break any rules. Also join our official server- https://discord.gg/vMvv5rr**',inline = False)
+    embed.set_image(url = 'https://media.giphy.com/media/OkJat1YNdoD3W/giphy.gif')
+    await client.send_message(member,embed=embed)
+   
     print("Sent message to " + member.name)
-    
-@client.event
-async def on_member_leave(member):
-    server = member.server
-    fmt = '{0.mention} just left {1.name}!'
-    await client.send_message(server, fmt.format(member, leaveUserMessage))
-     
+
 @client.command(pass_context = True)
 async def whois(ctx, user: discord.Member):
     embed = discord.Embed(title="{}'s info".format(user.name), description="Info about user.", color=0x000000)
