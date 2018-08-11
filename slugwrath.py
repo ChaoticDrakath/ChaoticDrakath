@@ -10,6 +10,15 @@ import os
 client = Bot(description="I am wand.", command_prefix="spell ", pm_help = True)
 client.remove_command('help')
 
+async def status_task():
+    while True:
+        await client.change_presence(game=discord.Game(name='Looking for spell book'))
+        await asyncio.sleep(5)
+        await client.change_presence(game=discord.Game(name='with '+str(len(set(client.get_all_members())))+' users'))
+        await asyncio.sleep(5)
+        await client.change_presence(game=discord.Game(name='in '+str(len(client.servers))+' servers'))
+        await asyncio.sleep(5)
+
 
 @client.event
 async def on_ready():
@@ -17,8 +26,8 @@ async def on_ready():
     print('--------------------------------------')
     print('Successfully Learned Spells/Curses!')
     print('Long Live Wizards!')
-    return await client.change_presence(game=discord.Game(name='With Spells/Curses.'))
-     
+    client.loop.create_task(status_task())
+    
 @client.event
 async def on_member_join(member):
    
