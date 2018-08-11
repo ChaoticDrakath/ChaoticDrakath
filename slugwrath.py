@@ -20,7 +20,7 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
    
-   if member.server.id == "450901954105966592":
+   if member.server.id == "476628581536235533":
     
 
     print("In our server" + member.name + " just joined")
