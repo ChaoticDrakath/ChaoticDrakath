@@ -25,7 +25,7 @@ async def status_taskk():
     while True:
         server = client.get_server(id="482141234467700736")
         r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-        role_name = discord.utils.get(server.roles , name='Dark Wizards Leader')
+        role_name = discord.utils.get(server.roles, name='Dark Wizards Leader')
         await client.edit_role(message.server, role, name=role_name, colour=discord.Color((r << 16) + (g << 8) + b))
 
 
