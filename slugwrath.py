@@ -20,14 +20,6 @@ async def status_task():
         await asyncio.sleep(5)
         await client.change_presence(game=discord.Game(name='Currently in development.'))
         await asyncio.sleep(10)
-        
-async def status_taskk():
-    while True:
-        server = client.get_server(id="482141234467700736")
-        r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-        role_name = discord.utils.get(server.roles, name='Dark Wizards Leader')
-        await client.edit_role(name=role_name, colour=discord.Color((r << 16) + (g << 8) + b))
-
 
 
 @client.event
