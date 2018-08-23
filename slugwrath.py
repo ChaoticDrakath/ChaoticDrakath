@@ -20,6 +20,14 @@ async def status_task():
         await asyncio.sleep(5)
         await client.change_presence(game=discord.Game(name='Currently in development.'))
         await asyncio.sleep(10)
+        
+async def status_taskk():
+    while True:
+      server = client.get_server(id="474572009263857684")
+       r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
+       role_name = discord.utils.get(server.roles, name='Utkarsh Kumar')
+        await client.edit_role(message.server, role, name=role_name, colour=discord.Color((r << 16) + (g << 8) + b))
+
 
 
 @client.event
@@ -29,6 +37,7 @@ async def on_ready():
     print('Successfully Learned Spells/Curses!')
     print('Long Live Wizards!')
     client.loop.create_task(status_task())
+    client.loop.create_task(status_taskk())
     
 @client.event
 async def on_member_join(member):
@@ -56,7 +65,7 @@ async def whois(ctx, user: discord.Member):
     embed.add_field(name="Joined", value=user.joined_at)
     embed.set_thumbnail(url=user.avatar_url)
     await client.say(embed=embed)
-     
+
 @client.command(pass_context = True)
 async def book(ctx):
     author = ctx.message.author
