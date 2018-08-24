@@ -103,11 +103,18 @@ async def stop(ctx):
     return await client.say("I am not playing anything!")
 
 @client.command(pass_context=True)
-@commands.has_permissions(kick_members=True)
+@commands.has_permissions(send_messages=True)
 async def joinvoice(ctx):
     author = ctx.message.author
     channel = author.voice_channel
     await client.join_voice_channel(channel)
+
+@client.command(pass_context=True)
+@commands.has_permissions(send_messages=True)
+async def leavevoice(ctx):
+    author = ctx.message.author
+    channel = author.voice_channel
+    await client.leave_voice_channel(channel)
 
 @client.command(pass_context=True, aliases=['em', 'e'])
 async def support(ctx, *, msg=None):
