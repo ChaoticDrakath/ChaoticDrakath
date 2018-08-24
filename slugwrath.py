@@ -135,7 +135,7 @@ async def userinfo(ctx, user: discord.Member):
     await client.say(embed=embed)
     
 @client.command(pass_context = True)
-@commands.check(is_legend)
+@commands.check(is_immortal)
 async def immortals(ctx):
     author = ctx.message.author
     await client.delete_message(ctx.message)
