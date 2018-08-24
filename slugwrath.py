@@ -14,7 +14,17 @@ from discord import Game, Embed, Color, Status, ChannelType
 Forbidden= discord.Embed(title="Permission Denied", description="1) Please check whether you have permission to perform this action or not. \n2) Please check whether my role has permission to perform this action in this channel or not. \n3) Please check my role position.", color=0x00ff00)
 client = Bot(description="I am Adventurer but i died in a battle Against main boss in AQ3D", command_prefix="Adventurer", pm_help = True)
 client.remove_command('help')
-await client.change_presence(game=discord.Game(name='for Hero.'))
+
+
+async def status_task():
+    while True:
+        await client.change_presence(game=discord.Game(name='Adventure Quest 3D'))
+        await asyncio.sleep(5)
+        await client.change_presence(game=discord.Game(name='with '+str(len(set(client.get_all_members())))+' users'))
+        await asyncio.sleep(5)
+        await client.change_presence(game=discord.Game(name='in '+str(len(client.servers))+' servers'))
+        await asyncio.sleep(5)
+
         
         
 @client.event
@@ -23,6 +33,7 @@ async def on_ready():
     print('--------')
     print('--------')
     print('Created By Sectus')
+    client.loop.create_task(status_task())
 
 def is_owner(ctx):
     return ctx.message.author.id == "471988330335174667"
@@ -99,8 +110,8 @@ async def joinvoice(ctx):
     await client.join_voice_channel(channel)
 
 @client.command(pass_context=True, aliases=['em', 'e'])
-async def modmail(ctx, *, msg=None):
-    channel = discord.utils.get(client.get_all_channels(), name='📬mod-mails📬')
+async def support(ctx, *, msg=None):
+    channel = discord.utils.get(client.get_all_channels(), name='support')
     r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
     color = discord.Color((r << 16) + (g << 8) + b)
     if not msg:
@@ -225,9 +236,9 @@ async def warn(ctx, userName: discord.User, *, message:str):
 @client.command(pass_context=True)
 async def ownerinfo(ctx):
     embed = discord.Embed(title="Information about owner", description="Bot Name- DarkBot", color=0x00ff00)
-    embed.set_footer(text="Copyright@UK Soft")
-    embed.set_author(name=" Bot Owner Name- DarkLegend#3807,|Sunny Singh|™✓#4856,Tag<!--Back-->#1488\nID:420525168381657090,395535610548322326,399274658027012098")
-    embed.add_field(name="Site- https://bit.ly/darkbotauth", value="Thanks for adding our bot", inline=True)
+    embed.set_footer(text="Copyright")
+    embed.set_author(name=" Bot Owner Name -Sectus#6460 -ID:471988330335174667")
+    embed.add_field(name="Site- -", value="-", inline=True)
     await client.say(embed=embed)
     
 @client.command(pass_context = True)
@@ -240,34 +251,7 @@ async def setup(ctx):
 
     await client.create_role(author.server, name="Owner", permissions=admin_perms)
     await client.create_role(author.server, name="Admin", permissions=admin_perms)
-    await client.create_role(author.server, name="Senior Moderator", permissions=mod_perms)
-    await client.create_role(author.server, name="G.O.H")
-    await client.create_role(author.server, name="Moderator", permissions=mod_perms)
-    await client.create_role(author.server, name="Muted")
-    
-    await client.create_role(author.server, name="Friend of Owner")
-    await client.create_role(author.server, name="Verified")
-    everyone_perms = discord.PermissionOverwrite(send_messages=False, read_messages=True)
-    everyone = discord.ChannelPermissions(target=server.default_role, overwrite=everyone_perms)
-    user_perms = discord.PermissionOverwrite(read_messages=True)
-    user = discord.ChannelPermissions(target=server.default_role, overwrite=user_perms)
-    private_perms = discord.PermissionOverwrite(read_messages=False)
-    private = discord.ChannelPermissions(target=server.default_role, overwrite=private_perms)    
-    await client.create_channel(server, '🎉welcome🎉',everyone)
-    await client.create_channel(server, '🎯rules🎯',everyone)
-    await client.create_channel(server, '🎥featured-content🎥',everyone)
-    await client.create_channel(server, '📢announcements📢',everyone)
-    await client.create_channel(server, '📢vote_polls📢',everyone)
-    await client.create_channel(server, 'private_chat',private)
-    await client.create_channel(server, '🎮general_chat🎮',user)
-    await client.create_channel(server, '🎮general_media🎮',user)
-    await client.create_channel(server, '👍bots_zone👍',user)
-    await client.create_channel(server, '🎥youtube_links🎥',user)
-    await client.create_channel(server, '🎥giveaway_links🎥',user)
-    await client.create_channel(server, '🎥other_links🎥',user)
-    await client.create_channel(server, '🔥Music Zone🔥', type=discord.ChannelType.voice)
-    await client.create_channel(server, '🔥music_command🔥s',user)
-    await client.create_channel(server, '🔥Chill Zone🔥', type=discord.ChannelType.voice)
+
     
 @client.command(pass_context = True)
 @commands.has_permissions(manage_nicknames=True)     
