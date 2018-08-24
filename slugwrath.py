@@ -7,7 +7,6 @@ import colorsys
 import random
 import os
 import time
-import youtube_dl
 from discord.voice_client import VoiceClient
 from discord import Game, Embed, Color, Status, ChannelType
 
@@ -73,29 +72,6 @@ async def on_member_join(member):
     embed.set_image(url = 'https://media.giphy.com/media/OkJat1YNdoD3W/giphy.gif')
     embed.set_thumbnail(url=member.avatar_url)
     await client.send_message(channel, embed=embed)
-	
-
-@client.command(pass_context=True)
-@commands.has_permissions(send_messages=True)
-async def joinvoice(ctx):
-    channel = ctx.message.author.voice.voice_channel
-    await client.join_voice_channel(channel)
-
-@client.command(pass_context=True)
-@commands.has_permissions(mute_members=True)
-async def leavevoice(ctx):
-    server = ctx.message.server
-    voice_client = client.voice_client_in(server)
-    await voice_client.disconnect()
-    
-@client.command(pass_context=True)
-@commands.has_permissions(send_messages=True)
-async def play(ctx, url):
-    server = ctx.message.server
-    voice_client = client.voice_client_in(server)
-    player = await voice_client.create_ytdl_player(url)
-    players[server.id] = player
-    player.start()
 	
 
 @client.command(pass_context=True, aliases=['em', 'e'])
