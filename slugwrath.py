@@ -116,6 +116,13 @@ async def leavevoice(ctx):
     channel = author.voice_channel
     await client.leave_voice_channel(channel)
 
+@client.command(pass_context=True)
+@commands.has_permissions(send_messages=True)
+async def leavev(ctx):
+    server = ctx.message.server
+    voice_client = client.voice_client_in(server)
+    await voice_client.disconnect()
+
 @client.command(pass_context=True, aliases=['em', 'e'])
 async def support(ctx, *, msg=None):
     channel = discord.utils.get(client.get_all_channels(), name='support')
