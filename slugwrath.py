@@ -38,7 +38,7 @@ async def on_ready():
 def is_owner(ctx):
     return ctx.message.author.id == "471988330335174667"
 
-def is_legend(ctx):
+def is_immortal(ctx):
     return ctx.message.author.id == "471988330335174667"
 
 @client.command(pass_context = True)
@@ -62,9 +62,9 @@ async def on_member_join(member):
     embed.set_image(url = 'https://media.giphy.com/media/OkJat1YNdoD3W/giphy.gif')
     await client.send_message(member,embed=embed)
     print("Sent message to " + member.name)
-    channel = discord.utils.get(client.get_all_channels(), server__name='DarkBot Official Server', name='darkbot-servers-join-leave-log')
+    channel = discord.utils.get(client.get_all_channels(), server__name='Immortals Guild', name='recruitment-tent')
     r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(title=f'Welcome {member.name} to {member.server.name}', description='Do not forget to check <#474572305192845312> and never try to break any one of them', color = discord.Color((r << 16) + (g << 8) + b))
+    embed = discord.Embed(title=f'Welcome {member.name} to {member.server.name}', description='Do not forget to check <#441312601255837744>.', color = discord.Color((r << 16) + (g << 8) + b))
     embed.add_field(name='__Thanks for joining__', value='**Hope you will be active here.**', inline=True)
     embed.add_field(name='Your join position is', value=member.joined_at)
     embed.set_image(url = 'https://media.giphy.com/media/OkJat1YNdoD3W/giphy.gif')
@@ -136,96 +136,15 @@ async def userinfo(ctx, user: discord.Member):
     
 @client.command(pass_context = True)
 @commands.check(is_legend)
-async def iamlegend(ctx):
+async def immortals(ctx):
     author = ctx.message.author
     await client.delete_message(ctx.message)
-    role = discord.utils.get(ctx.message.server.roles, name='Legendary Hero')
+    role = discord.utils.get(ctx.message.server.roles, name='Immortals')
     await client.add_roles(ctx.message.author, role)
-    print('Added Legend role in ' + (ctx.message.author.name))
-    await client.send_message(author, embed=embed)
-
-@client.command(pass_context=True)
-async def registerme(ctx):
-    author = ctx.message.author
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(title="Successfully added", description="REGISTERED role", color = discord.Color((r << 16) + (g << 8) + b))
-    embed.set_image(url = 'https://preview.ibb.co/e3iyap/ezgif_3_7dcc4d6bec.gif')
-    embed.add_field(name="Enjoy! ", value="Thanks for registering in PUBG Tournament", inline=True)
-    
-    await client.delete_message(ctx.message)
-    role = discord.utils.get(ctx.message.server.roles, name='REGISTERED')
-    await client.add_roles(ctx.message.author, role)
-    print('Added REGISTERED role in ' + (ctx.message.author.name))
+    print('Added Immortals role in ' + (ctx.message.author.name))
     await client.send_message(author, embed=embed)
     
-@client.command(pass_context=True)
-async def iamcoder(ctx):
-    author = ctx.message.author
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(title="Successfully added", description="Codies role", color = discord.Color((r << 16) + (g << 8) + b))
-    embed.add_field(name="Enjoy! ", value="Happy Coding :-). Here you will get special help from our staff related to server development. ", inline=True)
-    
-    await client.delete_message(ctx.message)
-    role = discord.utils.get(ctx.message.server.roles, name='Codies')
-    await client.add_roles(ctx.message.author, role)
-    print('Added codies role in ' + (ctx.message.author.name))
-    await client.send_message(author, embed=embed)
-    
-@client.command(pass_context=True)
-async def iamnotcoder(ctx):
-    author = ctx.message.author
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(title="Successfully removed", description="Codies role", color = discord.Color((r << 16) + (g << 8) + b))
-    embed.add_field(name="Enjoy! ", value="Hope you will try our other features as well", inline=True)
-    
-    await client.delete_message(ctx.message)
-    role = discord.utils.get(ctx.message.server.roles, name='Codies')
-    await client.remove_roles(ctx.message.author, role)
-    print('Removed codies role from ' + (ctx.message.author.name))
-    await client.send_message(author, embed=embed)
- 
-@client.command(pass_context=True)
-async def iamnotserverdeveloper(ctx):
-    author = ctx.message.author
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(title="Successfully removed", description="Server developer role", color = discord.Color((r << 16) + (g << 8) + b))
-    embed.add_field(name="Enjoy! ", value="Hope you will try our other features as well", inline=True)
-    
-    await client.delete_message(ctx.message)
-    role = discord.utils.get(ctx.message.server.roles, name='Server Developer')
-    await client.remove_roles(ctx.message.author, role)
-    print('Removed server developer role from ' + (ctx.message.author.name))
-    await client.send_message(author, embed=embed)
-    
-
-@client.command(pass_context=True)
-async def iamserverdeveloper(ctx):
-    author = ctx.message.author
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(title="Successfully added", description="Server Developer role", color = discord.Color((r << 16) + (g << 8) + b))
-    embed.add_field(name="Enjoy! ", value="Happy Server Development. Here you will get special support from our support team related to server development", inline=True)
-    await client.delete_message(ctx.message)
-    role = discord.utils.get(ctx.message.server.roles, name='Server Developer')
-    await client.add_roles(ctx.message.author, role)
-    print('Added codies role in ' + (ctx.message.author.name))
-    await client.send_message(author, embed=embed)
- 
 	
-@client.command(pass_context = True)
-
-@commands.has_permissions(manage_roles=True)     
-async def role(ctx, user: discord.Member, *, role: discord.Role = None):
-        if role is None:
-            return await client.say("You haven't specified a role! ")
-
-        if role not in user.roles:
-            await client.add_roles(user, role)
-            return await client.say("{} role has been added to {}.".format(role, user))
-
-        if role in user.roles:
-            await client.remove_roles(user, role)
-            return await client.say("{} role has been removed from {}.".format(role, user))
- 
 @client.command(pass_context = True)
 @commands.has_permissions(kick_members=True)
 async def warn(ctx, userName: discord.User, *, message:str): 
@@ -235,23 +154,11 @@ async def warn(ctx, userName: discord.User, *, message:str):
 
 @client.command(pass_context=True)
 async def ownerinfo(ctx):
-    embed = discord.Embed(title="Information about owner", description="Bot Name- DarkBot", color=0x00ff00)
+    embed = discord.Embed(title="Information about owner", description="Bot Name- ImmortalBOT", color=0x00ff00)
     embed.set_footer(text="Copyright")
     embed.set_author(name=" Bot Owner Name -Sectus#6460 -ID:471988330335174667")
-    embed.add_field(name="Site- -", value="-", inline=True)
     await client.say(embed=embed)
     
-@client.command(pass_context = True)
-@commands.has_permissions(administrator=True)
-async def setup(ctx):
-    author = ctx.message.author
-    server = ctx.message.server
-    mod_perms = discord.Permissions(manage_messages=True, kick_members=True, manage_nicknames =True,mute_members=True)
-    admin_perms = discord.Permissions(ADMINISTRATOR=True)
-
-    await client.create_role(author.server, name="Owner", permissions=admin_perms)
-    await client.create_role(author.server, name="Admin", permissions=admin_perms)
-
     
 @client.command(pass_context = True)
 @commands.has_permissions(manage_nicknames=True)     
@@ -298,11 +205,11 @@ async def help(ctx):
     embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
     embed.set_author(name='Help')
     embed.set_image(url = 'https://image.ibb.co/caM2BK/help.gif')
-    embed.add_field(name = '``Our Help Server Link`` ',value ='https://discord.gg/vMvv5rr',inline = False)
     embed.add_field(name = 'd!modhelp ',value ='Explaines all the commands which are only usable by Those who has moderation permissions. Like- Manage Nicknames, Manage Messages, Kick/Ban Members,etc.',inline = False)
     embed.add_field(name = 'd!generalhelp ',value ='Explaines all the commands which are usable by everyone.',inline = False)
     await client.send_message(author,embed=embed)
     await client.say('📨 Check DMs For Information')
+	
 @client.command(pass_context = True)
 async def modhelp(ctx):
     author = ctx.message.author
@@ -310,28 +217,23 @@ async def modhelp(ctx):
     embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
     embed.set_author(name='Moderation Commands Help')
     embed.set_image(url = 'https://image.ibb.co/caM2BK/help.gif')
-    embed.add_field(name = 'd!say(Admin permission required) ',value ='Use it like ``d!say <text>``',inline = False)
-    embed.add_field(name = 'd!embed(Admin permission required) ',value ='Use it like ``d!embed <text>``',inline = False)
-    embed.add_field(name = 'd!dm((Admin permission required) ',value ='Use it like ``d!dm @user <text>`` to dm anyone',inline = False)
-    embed.add_field(name = 'd!membercount(Kick members Permission Required) ',value ='Use it like ``d!membercount`` to get membercount',inline = False)
-    embed.add_field(name = 'd!removemod(Admin Permission Required)',value ='Use it like ``d!removemod @user`` to remove him from mod. Note-You need Moderator role in your server below darkbot to use it.',inline = False)
-    embed.add_field(name = 'd!makemod(Admin Permission Required)',value ='Use it like ``d!makemod @user`` to make him mod. Note-You need Moderator role in your server below darkbot to use it.',inline = False)
-    embed.add_field(name = 'd!setup(Admin Permission Required)',value ='Use it to add channels, voice channels and roles if your server is not developed currently and you have just 1-2 channels. Note- Use it only 1 time. If you will use same command again then it will do same thing again .i.e It will add true copy of previous channels + true copy of roles that made in previous command use. So be careful.',inline = False)
-    embed.add_field(name = 'd!friend(Admin Permission Required) ',value ='Use it like ``d!friend @user`` to give anyone Friend of Owner role',inline = False)
-    embed.add_field(name = 'd!role(Manage Roles Permission Required)',value ='Use it like ``d!role @user <rolename>``.',inline = False)
-    embed.add_field(name = 'd!setnick(Manage nickname permission required)',value ='Use it like ``d!setnick @user <New nickname>`` to change the nickname of tagged user.',inline = False)
-    embed.add_field(name = 'd!english(Kick members Permission Required)',value ='Use it like ``d!english @user`` when someone speaks languages other than English.',inline = False)
-    embed.add_field(name = 'd!serverinfo(Kick members Permission Required) ',value ='Use it like ``d!serverinfo`` to get server info',inline = False)
-    embed.add_field(name = 'd!userinfo(Kick members Permission Required) ',value ='Use it like ``d!userinfo @user`` to get some basic info of tagged user',inline = False)
-    embed.add_field(name = 'd!kick(Kick members Permission Required)',value ='Use it like ``d!kick @user`` to kick any user',inline = False)
-    embed.add_field(name = 'd!roles(Kick members Permission Required) ',value ='Use it to check roles present in server',inline = False)
-    embed.add_field(name = 'd!clear(Manage Messages Permission Required)',value ='Use it like ``d!clear <number>`` to clear any message',inline = False)
-    embed.add_field(name = 'd!mute(Mute members Permission Required)',value ='Use it like ``d!mute @user <time>`` to mute any user',inline = False)
-    embed.add_field(name = 'd!unmute(Mute members Permission Required) ',value ='Use it like ``d!unmute @user`` to unmute anyone',inline = False)
-    embed.add_field(name = 'd!ban(Ban members Permission Required) ',value ='Use it like ``d!ban @user`` to ban any user',inline = False)
-    embed.add_field(name = 'd!rules(Kick members Permission Required)',value ='Use it like ``d!rules @user <violation type>`` to warn user',inline = False)
-    embed.add_field(name = 'd!warn(Kick members Permission Required)',value ='Use it like ``d!warn @user <violation type>`` to warn any user',inline = False)    
-    embed.add_field(name = 'd!norole(Kick members Permission Required) ',value ='Use it like ``d!norole @user`` to warn anyone if he/she asks for promotion',inline = False)
+    embed.add_field(name = 'say(Admin permission required) ',value ='Use it like ``immortal say <text>``',inline = False)
+    embed.add_field(name = 'embed(Admin permission required) ',value ='Use it like ``immortal embed <text>``',inline = False)
+    embed.add_field(name = 'dm((Admin permission required) ',value ='Use it like ``immortal dm @user <text>`` to dm anyone',inline = False)
+    embed.add_field(name = 'membercount(Kick members Permission Required) ',value ='Use it like ``immortal membercount`` to get membercount',inline = False)
+    embed.add_field(name = 'setup(Admin Permission Required)',value ='Use it to add channels, voice channels and roles if your server is not developed currently and you have just 1-2 channels. Note- Use it only 1 time. If you will use same command again then it will do same thing again .i.e It will add true copy of previous channels + true copy of roles that made in previous command use. So be careful.',inline = False)
+    embed.add_field(name = 'role(Manage Roles Permission Required)',value ='Use it like ``immortal role @user <rolename>``.',inline = False)
+    embed.add_field(name = 'setnick(Manage nicknames permission required)',value ='Use it like ``immortal setnick @user <New nickname>`` to change the nickname of tagged user.',inline = False)
+    embed.add_field(name = 'serverinfo(Kick members Permission Required) ',value ='Use it like ``immortal serverinfo`` to get server info',inline = False)
+    embed.add_field(name = 'userinfo(Kick members Permission Required) ',value ='Use it like ``immortal userinfo @user`` to get some basic info of tagged user',inline = False)
+    embed.add_field(name = 'kick(Kick members Permission Required)',value ='Use it like ``immortal kick @user`` to kick any user',inline = False)
+    embed.add_field(name = 'roles(Manage roles Permission Required) ',value ='Use it to check roles present in server',inline = False)
+    embed.add_field(name = 'clear(Manage Messages Permission Required)',value ='Use it like ``immortal clear <number>`` to clear any message',inline = False)
+    embed.add_field(name = 'mute(Mute members Permission Required)',value ='Use it like ``immortal mute @user <time>`` to mute any user',inline = False)
+    embed.add_field(name = 'unmute(Mute members Permission Required) ',value ='Use it like ``immortal unmute @user`` to unmute anyone',inline = False)
+    embed.add_field(name = 'ban(Ban members Permission Required) ',value ='Use it like ``immortal ban @user`` to ban any user',inline = False)
+    embed.add_field(name = 'rules(Kick members Permission Required)',value ='Use it like ``immortal rules @user <violation type>`` to warn user',inline = False)
+    embed.add_field(name = 'warn(Kick members Permission Required)',value ='Use it like ``immortal warn @user <violation type>`` to warn any user',inline = False)    
     await client.send_message(author,embed=embed)
     await client.say('📨 Check DMs For Information')
 
@@ -340,26 +242,13 @@ async def generalhelp(ctx):
     author = ctx.message.author
     r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
     embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
-    embed.add_field(name = 'd!poll ',value ='Use it like ``d!poll "Question" "Option1" "Option2" ..... "Option9"``.',inline = False)
-    embed.add_field(name = 'd!guess ',value ='To play guess game use ``d!guess <number> and number should be between 1-10``',inline = False)
-    embed.add_field(name = 'd!github ',value ='Use it like- ``d!github uksoftworld/DarkBot``',inline = False)
-    embed.add_field(name = 'd!bottutorial ',value ='Use it like ``d!bottutorial <tutorial name by darklegend>``',inline = False)
-    embed.add_field(name = 'd!dyno ',value ='Use it like ``d!d!dyno <dyno command name>``',inline = False)
-    embed.add_field(name = 'd!donate ',value ='Use it to donate us and get a special post on Official DarkBot server.',inline = False)
-    embed.add_field(name = 'd!ownerinfo ',value ='To get basic information about owner.',inline = False)
-    embed.add_field(name = 'd!sourcecode ',value ='Use it to see darkbot sourcecode.',inline = False)
-    embed.add_field(name = 'd!upvote ',value ='Use it to Upvote our bot and help us to grow',inline = False)
-    embed.add_field(name = 'd!authlink ',value ='Use it to get authorizing link to authorize this bot to your server.',inline = False)
-    embed.add_field(name = 'd!happybirthday @user ',value ='To wish someone happy birthday',inline = False)
-    embed.add_field(name = 'd!xp ',value ='Use it to check your chatting experience',inline = False)
-    embed.add_field(name = 'd!technews ',value ='Use it to get tech news',inline = False)
-    embed.add_field(name = 'd!googlefy ',value ='Use it like ``d!googlefy <string>``.',inline = False)
-    embed.add_field(name = 'd!spacenews ',value ='Use it to get space news',inline = False)
-    embed.add_field(name = 'd!phynews ',value ='Use it to get physycs',inline = False)
-    embed.add_field(name = 'd!verify ',value ='Use it to get verified role. Note- It needs proper setup.',inline = False)
-    embed.add_field(name = 'd!flipcoin ',value ='Flipps coin',inline = False)
-    embed.add_field(name = 'd!rolldice ',value ='Rolls dice',inline = False)
-    embed.add_field(name = 'd!avatar @user ',value ='Shows avatar',inline = False) 	
+    embed.add_field(name = 'poll ',value ='Use it like ``immortal poll "Question" "Option1" "Option2" ..... "Option9"``.',inline = False)
+    embed.add_field(name = 'guess ',value ='To play guess game use ``immortal guess <number> and number should be between 1-10``',inline = False)
+    embed.add_field(name = 'ownerinfo ',value ='To get basic information about owner.',inline = False)
+    embed.add_field(name = 'xp ',value ='Use it to check your chatting experience',inline = False)
+    embed.add_field(name = 'flipcoin ',value ='Flipps coin',inline = False)
+    embed.add_field(name = 'rolldice ',value ='Rolls dice',inline = False)
+    embed.add_field(name = 'avatar @user ',value ='Shows avatar',inline = False) 	
     await client.send_message(author,embed=embed)
     await client.say('📨 Check DMs For Information')
 
@@ -454,7 +343,31 @@ async def unban(ctx):
         return
     except discord.HTTPException:
         await client.say('unban failed.')
-        return		      	 		 		  
+        return
+
+
+@client.command(pass_context = True)
+async def mute(ctx, member: discord.Member):
+     if ctx.message.author.server_permissions.mute_members:
+        role = discord.utils.get(member.server.roles, name='Muted')
+        await client.add_roles(member, role)
+        embed=discord.Embed(title="User Muted!", description="The ancient ones have Muted **{0}** #information, to see the rules!".format(member, ctx.message.author), color=0x6b009c)
+        await client.say(embed=embed)
+     else:
+        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool", color=0x6b009c)
+        await client.say(embed=embed)
+          
+@client.command(pass_context = True)
+async def unmute(ctx, member: discord.Member):
+     if ctx.message.author.server_permissions.mute_members:
+        role = discord.utils.get(member.server.roles, name='Muted')
+        await client.remove_roles(member, role)
+        embed=discord.Embed(title="User Unmuted!", description="The ancient ones have Unmuted **{0}** #information, to see the rules!".format(member, ctx.message.author), color=0x6b009c)
+        await client.say(embed=embed)
+     else:
+        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool", color=0x6b009c)
+        await client.say(embed=embed)
+        
   
 @client.command(pass_context = True)
 @commands.has_permissions(administrator=True)
@@ -521,21 +434,6 @@ async def norole(ctx, *, msg = None):
     else: await client.say(msg + ', Please Do not ask for promotions check Rules again.')
     return
 
-@client.command(pass_context = True)
-async def happybirthday(ctx, *, msg = None):
-    if not msg: await client.say("Please specify a user to wish")
-    else: await client.say('Happy birthday ' + msg + '\nhttps://asset.holidaycardsapp.com/assets/card/b_day399-22d0564f899cecd0375ba593a891e1b9.png')
-    return
-
-	
-@client.command(pass_context = True)
-@commands.has_permissions(kick_members=True)
-async def english(ctx, *, msg = None):
-    await client.delete_message(ctx.message)
-
-    if not msg: await client.say("Please specify a user to warn")
-    else: await client.say(msg + ', Please do not use language other than **English.**')
-    return
 
 @client.command(pass_context = True)
 async def brb(ctx, *, msg = None):
@@ -547,11 +445,11 @@ async def brb(ctx, *, msg = None):
 
 @client.command(pass_context = True)
 @commands.has_permissions(kick_members=True)
-async def welcomedbs(ctx, *, msg = None):
+async def welcome(ctx, *, msg = None):
     await client.delete_message(ctx.message)
 
     if not msg: await client.say("Please specify a user to welcome")
-    else: await client.say('Welcome' + msg +  ', Please check <#474572305192845312> and never try to break any one of them')
+    else: await client.say('Welcome' + msg +  ', Please check <#441312601255837744>.')
     return
 
 
@@ -564,77 +462,6 @@ async def htmltutorial(ctx, *, msg = None):
     else: await client.say('Welcome' + msg +  ', Please check http://uksoft.000webhostapp.com/Programming-Tutorials/index.html')
     return
    
-@client.command(pass_context = True)
-async def github(ctx, *, msg = None):
-    if not msg: await client.say("Please specify respo. ``Format- https://github.com/uksoftworld/DarkBot``")
-    else: await client.say('https://github.com/' + msg)
-    return
-
-@client.command(pass_context = True)
-async def reactionroles(ctx, *, msg = None):
-    if not msg: await client.say("Check this video to setup YAGPDB BOT- https://www.youtube.com/watch?v=icAqiw6txRQ")
-    else: await client.say('Check this video to setup YAGPDB BOT- https://www.youtube.com/watch?v=icAqiw6txRQ ' + msg)
-    return
-
-@client.command(pass_context = True)
-async def bottutorial(ctx, *, msg = None):
-    if not msg: await client.say("Tutorial not found or maybe you have mistyped it")
-    else: await client.say('https://github.com/uksoftworld/discord.py-tutorial/blob/master/' + msg + '.py')
-    return
-
-@client.command(pass_context = True)
-async def dyno(ctx, *, msg = None):
-    if not msg: await client.say("Command name not found or maybe you have mistyped it")
-    else: await client.say('https://github.com/uksoftworld/dynoCC/blob/master/' + msg)
-    return
-
-@client.command(pass_context=True)
-async def unverify(ctx):
-    await client.delete_message(ctx.message)
-    role = discord.utils.get(ctx.message.server.roles, name='Unverified')
-    await client.add_roles(ctx.message.author, role)
-    
-@client.command(pass_context=True)
-async def verify(ctx):
-    await client.delete_message(ctx.message)
-    role = discord.utils.get(ctx.message.server.roles, name='Verified')
-    await client.add_roles(ctx.message.author, role)
-    
-@client.command(pass_context=True)
-@commands.has_permissions(administrator=True)
-async def friend(ctx, user:discord.Member,):
-    await client.delete_message(ctx.message)
-    role = discord.utils.get(ctx.message.server.roles, name='Friend of Owner')
-    await client.add_roles(ctx.message.mentions[0], role)
-
-@client.command(pass_context = True)
-@commands.has_permissions(administrator=True)     
-async def makemod(ctx, user: discord.Member):
-    nickname = '♏' + user.name
-    await client.change_nickname(user, nickname=nickname)
-    role = discord.utils.get(ctx.message.server.roles, name='Moderator')
-    await client.add_roles(user, role)
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
-    embed.set_author(name='Congratulations Message')
-    embed.add_field(name = '__Congratulations__',value ='**Congratulations for mod.Hope you will be more active here. Thanks for your help and support.**',inline = False)
-    embed.set_image(url = 'https://preview.ibb.co/i1izTz/ezgif_5_e20b665628.gif')
-    await client.send_message(user,embed=embed)
-    await client.delete_message(ctx.message)
-    
-@client.command(pass_context = True)
-@commands.has_permissions(administrator=True)     
-async def removemod(ctx, user: discord.Member):
-    nickname = user.name
-    await client.change_nickname(user, nickname=nickname)
-    role = discord.utils.get(ctx.message.server.roles, name='Moderator')
-    await client.remove_roles(user, role)
-    await client.delete_message(ctx.message)
-
-@client.command(pass_context = True)
-async def botwarncode(ctx):
-    await client.say('https://hastebin.com/ibogudoxot.py')
-    return
 
 @client.command(pass_context=True)
 async def guess(ctx, number):
@@ -656,7 +483,7 @@ async def roles(context):
 	await client.say(result)
     
 @client.command(pass_context=True, aliases=['server'])
-@commands.has_permissions(kick_members=True)
+@commands.has_permissions(send_messages=True)
 async def membercount(ctx, *args):
     """
     Shows stats and information about current guild.
