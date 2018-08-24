@@ -343,19 +343,6 @@ async def unmute(ctx, member: discord.Member):
      else:
         embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool", color=0x6b009c)
         await client.say(embed=embed)
-        
-	
-@client.command(pass_context=True, aliases=['em', 'e'])
-async def modmail(ctx, *, msg=None):
-    channel = discord.utils.get(client.get_all_channels(), name='📬mod-mails📬')
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    color = discord.Color((r << 16) + (g << 8) + b)
-    if not msg:
-        await client.say("Please specify a message to send")
-    else:
-        await client.send_message(channel, embed=discord.Embed(color=color, description=msg + '\n Message From-' + ctx.message.author.id))
-        await client.delete_message(ctx.message)
-    return
 
   
 @client.command(pass_context = True)
