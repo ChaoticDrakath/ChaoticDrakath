@@ -12,7 +12,7 @@ from discord import Game, Embed, Color, Status, ChannelType
 
 
 Forbidden= discord.Embed(title="Permission Denied", description="1) Please check whether you have permission to perform this action or not. \n2) Please check whether my role has permission to perform this action in this channel or not. \n3) Please check my role position.", color=0x00ff00)
-client = Bot(description="I am ImmortalBOT and i love being immortal!", command_prefix="Immortal ", pm_help = True)
+client = Bot(description="I am ImmortalBOT and i love being immortal!", command_prefix="immortal ", pm_help = True)
 client.remove_command('help')
 
 
@@ -205,17 +205,17 @@ async def help(ctx):
     embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
     embed.set_author(name='Help')
     embed.set_image(url = 'https://image.ibb.co/caM2BK/help.gif')
-    embed.add_field(name = 'd!modhelp ',value ='Explaines all the commands which are only usable by Those who has moderation permissions. Like- Manage Nicknames, Manage Messages, Kick/Ban Members,etc.',inline = False)
-    embed.add_field(name = 'd!generalhelp ',value ='Explaines all the commands which are usable by everyone.',inline = False)
+    embed.add_field(name = 'immortal officerhelp ',value ='Explaines all the commands which are only usable by Those who has officer permissions. Like- Manage Nicknames, Manage Messages, Kick/Ban Members,etc.',inline = False)
+    embed.add_field(name = 'immortal generalhelp ',value ='Explaines all the commands which are usable by everyone.',inline = False)
     await client.send_message(author,embed=embed)
     await client.say('📨 Check DMs For Information')
 	
 @client.command(pass_context = True)
-async def modhelp(ctx):
+async def officerhelp(ctx):
     author = ctx.message.author
     r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
     embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
-    embed.set_author(name='Moderation Commands Help')
+    embed.set_author(name='Officer Commands Help')
     embed.set_image(url = 'https://image.ibb.co/caM2BK/help.gif')
     embed.add_field(name = 'say(Admin permission required) ',value ='Use it like ``immortal say <text>``',inline = False)
     embed.add_field(name = 'embed(Admin permission required) ',value ='Use it like ``immortal embed <text>``',inline = False)
