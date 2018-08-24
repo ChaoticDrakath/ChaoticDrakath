@@ -7,6 +7,7 @@ import colorsys
 import random
 import os
 import time
+import youtube_dl
 from discord.voice_client import VoiceClient
 from discord import Game, Embed, Color, Status, ChannelType
 
@@ -14,6 +15,8 @@ from discord import Game, Embed, Color, Status, ChannelType
 Forbidden= discord.Embed(title="Permission Denied", description="1) Please check whether you have permission to perform this action or not. \n2) Please check whether my role has permission to perform this action in this channel or not. \n3) Please check my role position.", color=0x00ff00)
 client = Bot(description="I am ImmortalBOT and i love being immortal!", command_prefix="immortal ", pm_help = True)
 client.remove_command('help')
+
+players = {}
 
 
 async def status_task():
@@ -83,6 +86,15 @@ async def leavevoice(ctx):
     server = ctx.message.server
     voice_client = client.voice_client_in(server)
     await voice_client.disconnect()
+
+@client.command(pass_context=True)
+@commands.has_permissions(send_messages=True)
+async def play(ctx, url):
+    server = ctx.message.server
+    voice_client = client.voice_client_in(server)
+    player = await voice_client.create_ytdl_player(url)
+    players[server.id] = player
+    player.start()
 
 @client.command(pass_context=True, aliases=['em', 'e'])
 async def support(ctx, *, msg=None):
