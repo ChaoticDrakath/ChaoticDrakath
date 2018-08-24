@@ -73,6 +73,16 @@ async def on_member_join(member):
     embed.set_thumbnail(url=member.avatar_url)
     await client.send_message(channel, embed=embed)
 	
+@client.event(pass_context=True)
+@commands.has_permissions(send_messages=True)
+async def avatar(ctx, user: discord.member):
+    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
+    embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
+    embed=discord.Embed(title="User avatar", description="User info.")
+    embed.add_field(name = '__Welcome to Our Server__',value ='**Hope you will be active here. Check Our server rules and never try to break any rules. ',inline = False)
+    embed.set_thumbnail(url=member.avatar_url)
+    await client.send_message(channel, embed=embed)
+	
 
 @client.command(pass_context=True, aliases=['em', 'e'])
 async def support(ctx, *, msg=None):
