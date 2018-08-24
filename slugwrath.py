@@ -71,57 +71,15 @@ async def on_member_join(member):
     embed.set_thumbnail(url=member.avatar_url)
     await client.send_message(channel, embed=embed)
 
-@client.command(pass_context = True)
-async def play(ctx, *, url):
-    author = ctx.message.author
-    voice_channel = author.voice_channel
-    try:
-        vc = await client.join_voice_channel(voice_channel)
-        msg = await client.say("Loading...")
-        player = await vc.create_ytdl_player("ytsearch:" + url)
-        player.start()
-        await client.say("Succesfully Loaded ur song!")
-        await client.delete_message(msg)
-    except Exception as e:
-        print(e)
-        await client.say("Reconnecting")
-        for x in client.voice_clients:
-            if(x.server == ctx.message.server):
-                await x.disconnect()
-                nvc = await client.join_voice_channel(voice_channel)
-                msg = await client.say("Loading...")
-                player2 = await nvc.create_ytdl_player("ytsearch:" + url)
-                player2.start()
-		
-@client.command(pass_context=True)
-async def yt(ctx, url):
-
-    author = ctx.message.author
-    voice_channel = author.voice_channel
-    vc = await client.join_voice_channel(voice_channel)
-
-    player = await vc.create_ytdl_player(url)
-    player.start()
-
-
-@client.command(pass_context = True)
-async def stop(ctx):
-    for x in client.voice_clients:
-        if(x.server == ctx.message.server):
-            return await x.disconnect()
-
-    return await client.say("I am not playing anything!")
-
 @client.command(pass_context=True)
 @commands.has_permissions(send_messages=True)
 async def joinvoice(ctx):
-    author = ctx.message.author
-    channel = author.voice_channel
+    channel = ctx.message.author.voice.voice_channel
     await client.join_voice_channel(channel)
 
 @client.command(pass_context=True)
-@commands.has_permissions(send_messages=True)
-async def leavev(ctx):
+@commands.has_permissions(mute_members=True)
+async def leavevoice(ctx):
     server = ctx.message.server
     voice_client = client.voice_client_in(server)
     await voice_client.disconnect()
