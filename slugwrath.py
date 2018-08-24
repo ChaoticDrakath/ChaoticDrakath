@@ -92,6 +92,16 @@ async def play(ctx, *, url):
                 msg = await client.say("Loading...")
                 player2 = await nvc.create_ytdl_player("ytsearch:" + url)
                 player2.start()
+		
+@client.command(pass_context=True)
+async def yt(ctx, url):
+
+    author = ctx.message.author
+    voice_channel = author.voice_channel
+    vc = await client.join_voice_channel(voice_channel)
+
+    player = await vc.create_ytdl_player(url)
+    player.start()
 
 
 @client.command(pass_context = True)
@@ -108,13 +118,6 @@ async def joinvoice(ctx):
     author = ctx.message.author
     channel = author.voice_channel
     await client.join_voice_channel(channel)
-
-@client.command(pass_context=True)
-@commands.has_permissions(send_messages=True)
-async def leavevoice(ctx):
-    author = ctx.message.author
-    channel = author.voice_channel
-    await client.leave_voice_channel(channel)
 
 @client.command(pass_context=True)
 @commands.has_permissions(send_messages=True)
