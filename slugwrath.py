@@ -7,7 +7,6 @@ import colorsys
 import random
 import os
 import time
-import youtube_dl
 from discord.voice_client import VoiceClient
 from discord import Game, Embed, Color, Status, ChannelType
 
