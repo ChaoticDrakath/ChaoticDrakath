@@ -73,7 +73,7 @@ async def on_member_join(member):
     embed.set_thumbnail(url=member.avatar_url)
     await client.send_message(channel, embed=embed)
 	
-@client.event(pass_context=True)
+@client.command(pass_context=True)
 @commands.has_permissions(send_messages=True)
 async def avatar(ctx, user: discord.member):
     r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
