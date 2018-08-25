@@ -74,7 +74,7 @@ async def on_member_join(member):
     await client.send_message(channel, embed=embed)
 	
 @client.command(pass_context=True)
-async def avatar(ctx, user: discord.Member):
+async def avatar(ctx, self, user: discord.Member):
     """Returns a user's avatar url. Use *av [user], or just *av for your own."""
     if user is None:
         await client.say(ctx.message.author.avatar_url)                   
