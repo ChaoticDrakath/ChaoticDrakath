@@ -142,10 +142,10 @@ async def givenick(ctx, user: discord.Member, *, nickname):
 @client.command(pass_context=True)
 async def poll(ctx, question, *options: str):
         if len(options) <= 1:
-            await client.say('You need more than one option to make a poll!')
+            await client.say("Poll can't have 1 option!")
             return
-        if len(options) > 10:
-            await client.say('You cannot make a poll for more than 10 things!')
+        if len(options) > 9:
+            await client.say('You cany make poll longer than 9 things!')
             return
 
         if len(options) == 2 and options[0] == 'yes' and options[1] == 'no':
