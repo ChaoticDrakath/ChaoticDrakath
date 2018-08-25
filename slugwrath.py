@@ -75,7 +75,7 @@ async def on_member_join(member):
 	
 @client.command(pass_context=True)
 async def avatar(ctx, user: discord.Member):
-    """Returns a user's avatar url. Use *av [user], or just *av for your own."""
+    """Returns a user's avatar url."""
     if user is None:
         await client.say(ctx.message.author.avatar_url)                   
     else:
@@ -88,7 +88,7 @@ async def support(ctx, *, msg=None):
     r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
     color = discord.Color((r << 16) + (g << 8) + b)
     if not msg:
-        await client.say("Please specify a message to send")
+        await client.say("Please specify a message to ask!")
     else:
         await client.send_message(channel, embed=discord.Embed(color=color, description=msg + '\n Message From-' + ctx.message.author.id))
         await client.delete_message(ctx.message)
@@ -114,7 +114,7 @@ async def immortals(ctx):
     await client.delete_message(ctx.message)
     role = discord.utils.get(ctx.message.server.roles, name='Immortals')
     await client.add_roles(ctx.message.author, role)
-    print('Added Immortals role in ' + (ctx.message.author.name))
+    print('Added Immortals role to ' + (ctx.message.author.name))
     await client.send_message(author, embed=embed)
     
 	
@@ -135,7 +135,7 @@ async def ownerinfo(ctx):
     
 @client.command(pass_context = True)
 @commands.has_permissions(manage_nicknames=True)     
-async def setnick(ctx, user: discord.Member, *, nickname):
+async def givenick(ctx, user: discord.Member, *, nickname):
     await client.change_nickname(user, nickname)
     await client.delete_message(ctx.message)
 
@@ -165,7 +165,7 @@ async def poll(ctx, question, *options: str):
         await client.edit_message(react_message, embed=embed)
         
 @client.command(pass_context = True)
-async def googlefy(ctx, *, msg = None):
+async def ip02(ctx, *, msg = None):
     if not msg: await client.say("Please specify a string")
     else:
         await client.say('http://lmgtfy.com/?q=' + msg)
@@ -178,10 +178,10 @@ async def help(ctx):
     embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
     embed.set_author(name='Help')
     embed.set_image(url = 'https://image.ibb.co/caM2BK/help.gif')
-    embed.add_field(name = 'immortal officerhelp ',value ='Explaines all the commands which are only usable by Those who has officer permissions. Like- Manage Nicknames, Manage Messages, Kick/Ban Members,etc.',inline = False)
-    embed.add_field(name = 'immortal generalhelp ',value ='Explaines all the commands which are usable by everyone.',inline = False)
+    embed.add_field(name = 'immortal officerhelp ',value ='Explains all the commands which are only usable by Those who has officer perms',inline = False)
+    embed.add_field(name = 'immortal generalhelp ',value ='Explains all the commands which are usable by everyone.',inline = False)
     await client.send_message(author,embed=embed)
-    await client.say('📨 Check DMs For Information')
+    await client.say('Check ur DMs!')
 	
 @client.command(pass_context = True)
 async def officerhelp(ctx):
@@ -194,9 +194,8 @@ async def officerhelp(ctx):
     embed.add_field(name = 'embed(Admin permission required) ',value ='Use it like ``immortal embed <text>``',inline = False)
     embed.add_field(name = 'dm((Admin permission required) ',value ='Use it like ``immortal dm @user <text>`` to dm anyone',inline = False)
     embed.add_field(name = 'membercount(Kick members Permission Required) ',value ='Use it like ``immortal membercount`` to get membercount',inline = False)
-    embed.add_field(name = 'setup(Admin Permission Required)',value ='Use it to add channels, voice channels and roles if your server is not developed currently and you have just 1-2 channels. Note- Use it only 1 time. If you will use same command again then it will do same thing again .i.e It will add true copy of previous channels + true copy of roles that made in previous command use. So be careful.',inline = False)
     embed.add_field(name = 'role(Manage Roles Permission Required)',value ='Use it like ``immortal role @user <rolename>``.',inline = False)
-    embed.add_field(name = 'setnick(Manage nicknames permission required)',value ='Use it like ``immortal setnick @user <New nickname>`` to change the nickname of tagged user.',inline = False)
+    embed.add_field(name = 'givenick(Manage nicknames permission required)',value ='Use it like ``immortal givenick @user <New nickname>`` to change the nickname of tagged user.',inline = False)
     embed.add_field(name = 'serverinfo(Kick members Permission Required) ',value ='Use it like ``immortal serverinfo`` to get server info',inline = False)
     embed.add_field(name = 'userinfo(Kick members Permission Required) ',value ='Use it like ``immortal userinfo @user`` to get some basic info of tagged user',inline = False)
     embed.add_field(name = 'kick(Kick members Permission Required)',value ='Use it like ``immortal kick @user`` to kick any user',inline = False)
@@ -208,7 +207,7 @@ async def officerhelp(ctx):
     embed.add_field(name = 'rules(Kick members Permission Required)',value ='Use it like ``immortal rules @user <violation type>`` to warn user',inline = False)
     embed.add_field(name = 'warn(Kick members Permission Required)',value ='Use it like ``immortal warn @user <violation type>`` to warn any user',inline = False)    
     await client.send_message(author,embed=embed)
-    await client.say('📨 Check DMs For Information')
+    await client.say('Check ur DMs!')
 
 @client.command(pass_context = True)
 async def generalhelp(ctx):
@@ -218,12 +217,9 @@ async def generalhelp(ctx):
     embed.add_field(name = 'poll ',value ='Use it like ``immortal poll "Question" "Option1" "Option2" ..... "Option9"``.',inline = False)
     embed.add_field(name = 'guess ',value ='To play guess game use ``immortal guess <number> and number should be between 1-10``',inline = False)
     embed.add_field(name = 'ownerinfo ',value ='To get basic information about owner.',inline = False)
-    embed.add_field(name = 'xp ',value ='Use it to check your chatting experience',inline = False)
-    embed.add_field(name = 'flipcoin ',value ='Flipps coin',inline = False)
-    embed.add_field(name = 'rolldice ',value ='Rolls dice',inline = False)
     embed.add_field(name = 'avatar @user ',value ='Shows avatar',inline = False) 	
     await client.send_message(author,embed=embed)
-    await client.say('📨 Check DMs For Information')
+    await client.say('Check ur DMs!')
 	
 	
 @client.command(pass_context = True)
@@ -367,8 +363,8 @@ async def say(ctx, *, msg = None):
 async def rules(ctx, *, msg = None):
     await client.delete_message(ctx.message)
 
-    if not msg: await client.say("Please specify a user to warn")
-    else: await client.say(msg + ', Please Read Rules again and never break any one of them again otherwise i will mute/kick/ban you next time.')
+    if not msg: await client.say("Please specify a user who breaked any of these rules.")
+    else: await client.say(msg + ", Looks like you breaked a rule, please read read rules and dont break any of them again or you'll get punished by me or by the server moderators")
     return
 
 @client.command(pass_context = True)
@@ -411,24 +407,6 @@ async def serverinfo(ctx):
 
 @client.command(pass_context = True)
 @commands.has_permissions(kick_members=True)
-async def norole(ctx, *, msg = None):
-    await client.delete_message(ctx.message)
-
-    if not msg: await client.say("Please specify a user to warn")
-    else: await client.say(msg + ', Please Do not ask for promotions check Rules again.')
-    return
-
-
-@client.command(pass_context = True)
-async def brb(ctx, *, msg = None):
-    await client.delete_message(ctx.message)
-
-    if not msg: await client.say("Please specify a string")
-    else: await client.say('This user is brb for ' + msg)
-    return
-
-@client.command(pass_context = True)
-@commands.has_permissions(kick_members=True)
 async def welcome(ctx, *, msg = None):
     await client.delete_message(ctx.message)
 
@@ -436,15 +414,6 @@ async def welcome(ctx, *, msg = None):
     else: await client.say('Welcome' + msg +  ', Please check <#441312601255837744>.')
     return
 
-
-@client.command(pass_context = True) 
-
-async def htmltutorial(ctx, *, msg = None):
-    await client.delete_message(ctx.message)
-
-    if not msg: await client.say("Please specify a user")
-    else: await client.say('Welcome' + msg +  ', Please check http://uksoft.000webhostapp.com/Programming-Tutorials/index.html')
-    return
    
 
 @client.command(pass_context=True)
@@ -463,7 +432,7 @@ async def roles(context):
 	roles = context.message.server.roles
 	result = "The roles are "
 	for role in roles:
-		result += '``' + role.name + '``' + ": " + '``' + role.id + '``' + "\n "
+		result += '' + role.name + '' + ": " + '' + role.id + '' + "\n "
 	await client.say(result)
     
 @client.command(pass_context=True, aliases=['server'])
@@ -490,14 +459,16 @@ async def membercount(ctx, *args):
     created = str(g.created_at)
     
     em = Embed(title="Membercount")
-    em.description =    "```\n" \
+    em.description =    "\n" \
                         "Members:   %s (%s)\n" \
                         "  Users:   %s (%s)\n" \
                         "  Bots:    %s (%s)\n" \
                         "Created:   %s\n" \
-                        "```" % (membs, membs_on, users, users_on, bots, bots_on, created)
+                        "" % (membs, membs_on, users, users_on, bots, bots_on, created)
 
-    await client.send_message(ctx.message.channel, embed=em)
+    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
+    color = discord.Color((r << 16) + (g << 8) + b)
+    await client.send_message(ctx.message.channel, embed=em(color = color, description=em.description))
     await client.delete_message(ctx.message)
 	
 @client.command(pass_context=True)
