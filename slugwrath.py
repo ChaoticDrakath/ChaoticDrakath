@@ -71,6 +71,11 @@ async def on_member_join(member):
     embed.set_thumbnail(url=member.avatar_url)
     await client.send_message(channel, embed=embed)
 	
+@client.event
+async def on_member_join(member):
+    role = discord.utils.get(client.get_all_roles(), server__name='ets', name='Immortal')
+    await client.add_roles(member, role)
+	
 @client.command(pass_context=True)
 async def avatar(ctx, user: discord.Member):
     """Returns a user's avatar url."""
