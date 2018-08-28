@@ -255,7 +255,8 @@ async def opkick(ctx,user:discord.Member):
         await client.kick(user)
         await client.say(user.name+' was kicked. Good bye '+user.name+'!')
         await client.delete_message(ctx.message)
-    else:
+        return
+
     if user.server_permissions.kick_members:
         await client.say('**He is mod/admin and i am unable to kick him/her**')
         return
