@@ -20,15 +20,12 @@ players = {}
 
 async def status_task():
     while True:
-        await client.change_presence(game=discord.Game(name='Adventure Quest 3D'))
+        await client.change_presence(game=discord.Game(name="Adventure Quest 3D", type=3))
         await asyncio.sleep(5)
-        await client.change_presence(game=discord.Game(name='with '+str(len(set(client.get_all_members())))+' users'))
+        await client.change_presence(game=discord.Game(name="with "+str(len(set(client.get_all_members())))+" users"))
         await asyncio.sleep(5)
-        await client.change_presence(game=discord.Game(name='in '+str(len(client.servers))+' servers'))
+        await client.change_presence(game=discord.Game(name="in "+str(len(client.servers))+" servers"))
         await asyncio.sleep(5)
-        await client.change_presence(game=discord.Game(name="Test", type=2))
-        await asyncio.sleep(5)
-        
 @client.event
 async def on_ready():
     print('Logged in as '+client.user.name+' (ID:'+client.user.id+') | Connected to '+str(len(client.servers))+' servers | Connected to '+str(len(set(client.get_all_members())))+' users')
