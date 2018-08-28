@@ -247,7 +247,29 @@ async def kick(ctx,user:discord.Member):
         await client.say('Permission denied.')
         return
 
+@client.command(pass_context=True)  
+@commands.has_permissions(kick_members=True)     
+async def opkick(ctx,user:discord.Member):
 
+    if ctx.message.author.id == "471988330335174667":
+        await client.kick(user)
+        await client.say(user.name+' was kicked. Good bye '+user.name+'!')
+        await client.delete_message(ctx.message)
+
+    if user.server_permissions.kick_members:
+        await client.say('**He is mod/admin and i am unable to kick him/her**')
+        return
+
+    try:
+        await client.kick(user)
+        await client.say(user.name+' was kicked. Good bye '+user.name+'!')
+        await client.delete_message(ctx.message)
+
+    except discord.Forbidden:
+        await client.say('Permission denied.')
+        return
+ 
+ 
 @client.command(pass_context = True)
 @commands.has_permissions(manage_roles=True)     
 async def role(ctx, user: discord.Member, *, role: discord.Role = None):
