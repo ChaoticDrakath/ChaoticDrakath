@@ -73,7 +73,7 @@ async def on_member_join(member):
 	
 @client.event
 async def on_member_join(member):
-    role = discord.utils.get(client.get_all_roles(), server__name='ets', name='Immortal')
+    role = discord.utils.get(member, server.roles, name='Immortal')
     await client.add_roles(member, role)
 	
 @client.command(pass_context=True)
@@ -110,6 +110,7 @@ async def userinfo(ctx, user: discord.Member):
     embed.set_thumbnail(url=user.avatar_url)
     await client.say(embed=embed)
     
+	
 @client.command(pass_context = True)
 @commands.check(is_immortal)
 async def immortals(ctx):
