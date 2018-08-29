@@ -35,6 +35,10 @@ async def on_ready():
     print('Created By Sectus')
     client.loop.create_task(status_task())
 
+@client.event
+async def on_message(message):
+    await client.process_commands(message)
+
 def is_owner(ctx):
     return ctx.message.author.id == "471988330335174667"
 
