@@ -12,7 +12,7 @@ from discord import Game, Embed, Color, Status, ChannelType
 
 
 Forbidden= discord.Embed(title="Permission Denied", description="1) Please check whether you have permission to perform this action or not. \n2) Please check whether my role has permission to perform this action in this channel or not. \n3) Please check my role position.", color=0x00ff00)
-client = Bot(description="I am ImmortalBOT and i love being immortal!", command_prefix="immortal ", pm_help = True)
+client = Bot(description="I am MushBOT!", command_prefix="Mush ", pm_help = True)
 client.remove_command('help')
 
 players = {}
@@ -20,11 +20,9 @@ players = {}
 
 async def status_task():
     while True:
-        await client.change_presence(game=discord.Game(name="Adventure Quest 3D", type=3))
+        await client.change_presence(game=discord.Game(name="with Mushronins!", type=3))
         await asyncio.sleep(5)
-        await client.change_presence(game=discord.Game(name="with "+str(len(set(client.get_all_members())))+" users"))
-        await asyncio.sleep(5)
-        await client.change_presence(game=discord.Game(name="in "+str(len(client.servers))+" servers"))
+        await client.change_presence(game=discord.Game(name="with "+str(len(set(client.get_all_members())))+" Mushronins!"))
         await asyncio.sleep(5)
 	
 @client.event
@@ -32,7 +30,7 @@ async def on_ready():
     print('Logged in as '+client.user.name+' (ID:'+client.user.id+') | Connected to '+str(len(client.servers))+' servers | Connected to '+str(len(set(client.get_all_members())))+' users')
     print('--------')
     print('--------')
-    print('Created By Sectus')
+    print('Created By Mushronin')
     client.loop.create_task(status_task())
 
 @client.event
@@ -77,7 +75,7 @@ async def on_member_join(member):
 	
 @client.event
 async def on_member_join(member):
-    role = discord.utils.get(member.server.roles, name='Immortal')
+    role = discord.utils.get(member.server.roles, name='Mushronin')
     await client.add_roles(member, role)
 	
 @client.command(pass_context=True)
@@ -116,17 +114,6 @@ async def userinfo(ctx, user: discord.Member):
     
 	
 @client.command(pass_context = True)
-@commands.check(is_immortal)
-async def immortals(ctx):
-    author = ctx.message.author
-    await client.delete_message(ctx.message)
-    role = discord.utils.get(ctx.message.server.roles, name='Immortals')
-    await client.add_roles(ctx.message.author, role)
-    print('Added Immortals role to ' + (ctx.message.author.name))
-    await client.send_message(author, embed=embed)
-    
-	
-@client.command(pass_context = True)
 @commands.has_permissions(kick_members=True)
 async def warn(ctx, userName: discord.User, *, message:str): 
     await client.send_message(userName, "You have been warned for: **{}**".format(message))
@@ -137,7 +124,7 @@ async def warn(ctx, userName: discord.User, *, message:str):
 async def ownerinfo(ctx):
     embed = discord.Embed(title="Information about owner", description="Bot Name- ImmortalBOT", color=0x00ff00)
     embed.set_footer(text="Copyright")
-    embed.set_author(name=" Bot Owner Name -Sectus#6460 -ID:471988330335174667")
+    embed.set_author(name=" Bot Owner Name -Mushronin #6460 -ID:471988330335174667")
     await client.say(embed=embed)
     
     
@@ -186,34 +173,36 @@ async def help(ctx):
     embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
     embed.set_author(name='Help')
     embed.set_image(url = 'https://image.ibb.co/caM2BK/help.gif')
-    embed.add_field(name = 'immortal officerhelp ',value ='Explains all the commands which are only usable by Those who has officer perms',inline = False)
-    embed.add_field(name = 'immortal generalhelp ',value ='Explains all the commands which are usable by everyone.',inline = False)
+    embed.add_field(name = 'Mush commanderhelp ',value ='Explains all the commands which are only usable by Those who has Commander role or above.',inline = False)
+    embed.add_field(name = 'Mush generalhelp ',value ='Explains all the commands which are usable by everyone.',inline = False)
+    embed.add_field(name = 'Mush legendhelp ',value ='Explains all the commands which are usable by Mushronins legend! (TBR)',inline = False)
     await client.send_message(author,embed=embed)
     await client.say('Check ur DMs!')
 	
 @client.command(pass_context = True)
-async def officerhelp(ctx):
+@commands.has_role("Mushronin's Commander")
+async def commanderhelp(ctx):
     author = ctx.message.author
     r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
     embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
     embed.set_author(name='Officer Commands Help')
     embed.set_image(url = 'https://image.ibb.co/caM2BK/help.gif')
-    embed.add_field(name = 'say(Admin permission required) ',value ='Use it like ``immortal say <text>``',inline = False)
-    embed.add_field(name = 'embed(Admin permission required) ',value ='Use it like ``immortal embed <text>``',inline = False)
-    embed.add_field(name = 'dm((Admin permission required) ',value ='Use it like ``immortal dm @user <text>`` to dm anyone',inline = False)
-    embed.add_field(name = 'membercount(Kick members Permission Required) ',value ='Use it like ``immortal membercount`` to get membercount',inline = False)
-    embed.add_field(name = 'role(Manage Roles Permission Required)',value ='Use it like ``immortal role @user <rolename>``.',inline = False)
-    embed.add_field(name = 'givenick(Manage nicknames permission required)',value ='Use it like ``immortal givenick @user <New nickname>`` to change the nickname of tagged user.',inline = False)
-    embed.add_field(name = 'serverinfo(Kick members Permission Required) ',value ='Use it like ``immortal serverinfo`` to get server info',inline = False)
-    embed.add_field(name = 'userinfo(Kick members Permission Required) ',value ='Use it like ``immortal userinfo @user`` to get some basic info of tagged user',inline = False)
-    embed.add_field(name = 'kick(Kick members Permission Required)',value ='Use it like ``immortal kick @user`` to kick any user',inline = False)
+    embed.add_field(name = 'say(Admin permission required) ',value ='Use it like ``Mush say <text>``',inline = False)
+    embed.add_field(name = 'embed(Admin permission required) ',value ='Use it like ``Mush embed <text>``',inline = False)
+    embed.add_field(name = 'dm((Admin permission required) ',value ='Use it like ``Mush dm @user <text>`` to dm anyone',inline = False)
+    embed.add_field(name = 'membercount(Kick members Permission Required) ',value ='Use it like ``Mush membercount`` to get membercount',inline = False)
+    embed.add_field(name = 'role(Manage Roles Permission Required)',value ='Use it like ``Mush role @user <rolename>``.',inline = False)
+    embed.add_field(name = 'givenick(Manage nicknames permission required)',value ='Use it like ``Mush givenick @user <New nickname>`` to change the nickname of tagged user.',inline = False)
+    embed.add_field(name = 'serverinfo(Kick members Permission Required) ',value ='Use it like ``Mush serverinfo`` to get server info',inline = False)
+    embed.add_field(name = 'userinfo(Kick members Permission Required) ',value ='Use it like ``Mush userinfo @user`` to get some basic info of tagged user',inline = False)
+    embed.add_field(name = 'kick(Kick members Permission Required)',value ='Use it like ``Mush kick @user`` to kick any user',inline = False)
     embed.add_field(name = 'roles(Manage roles Permission Required) ',value ='Use it to check roles present in server',inline = False)
-    embed.add_field(name = 'clear(Manage Messages Permission Required)',value ='Use it like ``immortal clear <number>`` to clear any message',inline = False)
-    embed.add_field(name = 'mute(Mute members Permission Required)',value ='Use it like ``immortal mute @user <time>`` to mute any user',inline = False)
-    embed.add_field(name = 'unmute(Mute members Permission Required) ',value ='Use it like ``immortal unmute @user`` to unmute anyone',inline = False)
-    embed.add_field(name = 'ban(Ban members Permission Required) ',value ='Use it like ``immortal ban @user`` to ban any user',inline = False)
-    embed.add_field(name = 'rules(Kick members Permission Required)',value ='Use it like ``immortal rules @user <violation type>`` to warn user',inline = False)
-    embed.add_field(name = 'warn(Kick members Permission Required)',value ='Use it like ``immortal warn @user <violation type>`` to warn any user',inline = False)    
+    embed.add_field(name = 'clear(Manage Messages Permission Required)',value ='Use it like ``Mush clear <number>`` to clear any message',inline = False)
+    embed.add_field(name = 'mute(Mute members Permission Required)',value ='Use it like ``Mush mute @user <time>`` to mute any user',inline = False)
+    embed.add_field(name = 'unmute(Mute members Permission Required) ',value ='Use it like ``Mush unmute @user`` to unmute anyone',inline = False)
+    embed.add_field(name = 'ban(Ban members Permission Required) ',value ='Use it like ``Mush ban @user`` to ban any user',inline = False)
+    embed.add_field(name = 'rules(Kick members Permission Required)',value ='Use it like ``Mush rules @user <violation type>`` to warn user',inline = False)
+    embed.add_field(name = 'warn(Kick members Permission Required)',value ='Use it like ``Mush warn @user <violation type>`` to warn any user',inline = False)    
     await client.send_message(author,embed=embed)
     await client.say('Check ur DMs!')
 
@@ -222,8 +211,8 @@ async def generalhelp(ctx):
     author = ctx.message.author
     r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
     embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
-    embed.add_field(name = 'poll ',value ='Use it like ``immortal poll "Question" "Option1" "Option2" ..... "Option9"``.',inline = False)
-    embed.add_field(name = 'guess ',value ='To play guess game use ``immortal guess <number> and number should be between 1-10``',inline = False)
+    embed.add_field(name = 'poll ',value ='Use it like ``Mush poll "Question" "Option1" "Option2" ..... "Option9"``.',inline = False)
+    embed.add_field(name = 'guess ',value ='To play guess game use ``Mush guess <number> and number should be between 1-10``',inline = False)
     embed.add_field(name = 'ownerinfo ',value ='To get basic information about owner.',inline = False)
     embed.add_field(name = 'avatar @user ',value ='Shows avatar',inline = False) 	
     await client.send_message(author,embed=embed)
