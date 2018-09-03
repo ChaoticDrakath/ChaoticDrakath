@@ -175,7 +175,7 @@ async def help(ctx):
     embed.set_image(url = 'https://image.ibb.co/caM2BK/help.gif')
     embed.add_field(name = 'Mush commanderhelp ',value ='Explains all the commands which are only usable by Those who has Commander role or above.',inline = False)
     embed.add_field(name = 'Mush generalhelp ',value ='Explains all the commands which are usable by everyone.',inline = False)
-    embed.add_field(name = 'Mush legendhelp ',value ='Explains all the commands which are usable by Mushronins legend! (TBR)',inline = False)
+    embed.add_field(name = 'Mush legendhelp ',value ='Explains all the commands which are usable by Mushronins legend! (TBD)',inline = False)
     await client.send_message(author,embed=embed)
     await client.say('Check ur DMs!')
 	
