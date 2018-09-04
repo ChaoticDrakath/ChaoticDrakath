@@ -3,7 +3,6 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 import asyncio
 import platform
-import colorsys
 import random
 import os
 import time
@@ -48,25 +47,19 @@ def is_immortal(ctx):
 async def restart():
     await client.logout()
 
-@client.event
-async def on_message(message):
-	await client.process_commands(message)
-
 
 
 @client.event
 async def on_member_join(member):
     print("In our server" + member.name + " just joined")
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
+    embed = discord.Embed(color = 0x5c0587)
     embed.set_author(name='Welcome message')
     embed.add_field(name = 'Welcome to Our Server!',value ='**Please be active and read rules. ',inline = False)
     embed.set_image(url = 'https://goo.gl/images/1T8Ce8')
     await client.send_message(member,embed=embed)
     print("Sent message to " + member.name)
     channel = discord.utils.get(client.get_all_channels(), server__name='ets', name='general')
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(title=f'Welcome {member.name} to {member.server.name}', description='Do not forget to check rules.', color = discord.Color((r << 16) + (g << 8) + b))
+    embed = discord.Embed(title=f'Welcome {member.name} to {member.server.name}', description='Do not forget to check rules.', color = 0x5c0587)
     embed.add_field(name='Thanks for joining!', value='**Please be active here.**', inline=True)
     embed.add_field(name='Your join position is', value=member.joined_at)
     embed.set_image(url = 'https://goo.gl/images/1T8Ce8')
@@ -90,8 +83,7 @@ async def avatar(ctx, user: discord.Member):
 @client.command(pass_context=True, aliases=['em', 'e'])
 async def support(ctx, *, msg=None):
     channel = discord.utils.get(client.get_all_channels(), name='support')
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    color = discord.Color((r << 16) + (g << 8) + b)
+    color = 0x5c0587
     if not msg:
         await client.say("Please specify a message to ask!")
     else:
@@ -102,8 +94,7 @@ async def support(ctx, *, msg=None):
 @client.command(pass_context = True)
 @commands.has_permissions(kick_members=True)     
 async def userinfo(ctx, user: discord.Member):
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color = discord.Color((r << 16) + (g << 8) + b))
+    embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color = 0x5c0587)
     embed.add_field(name="Name", value=user.name, inline=True)
     embed.add_field(name="ID", value=user.id, inline=True)
     embed.add_field(name="Status", value=user.status, inline=True)
@@ -151,8 +142,7 @@ async def poll(ctx, question, *options: str):
         description = []
         for x, option in enumerate(options):
             description += '\n {} {}'.format(reactions[x], option)
-            r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-        embed = discord.Embed(title=question, description=''.join(description), color = discord.Color((r << 16) + (g << 8) + b))
+        embed = discord.Embed(title=question, description=''.join(description), color = 0x5c0587)
         react_message = await client.say(embed=embed)
         for reaction in reactions[:len(options)]:
             await client.add_reaction(react_message, reaction)
@@ -169,13 +159,12 @@ async def ip02(ctx, *, msg = None):
 @client.command(pass_context = True)
 async def help(ctx):
     author = ctx.message.author
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
+    embed = discord.Embed(color = 0x5c0587)
     embed.set_author(name='Help')
     embed.set_image(url = 'https://image.ibb.co/caM2BK/help.gif')
-    embed.add_field(name = 'Mush commanderhelp ',value ='Explains all the commands which are only usable by Those who has Commander role or above.',inline = False)
-    embed.add_field(name = 'Mush generalhelp ',value ='Explains all the commands which are usable by everyone.',inline = False)
-    embed.add_field(name = 'Mush legendhelp ',value ='Explains all the commands which are usable by Mushronins legend! (TBD)',inline = False)
+    embed.add_field(name = 'Dark Shroom commanderhelp ',value ='Explains all the commands which are only usable by Those who has Commander role or above.',inline = False)
+    embed.add_field(name = 'Dark Shroom generalhelp ',value ='Explains all the commands which are usable by everyone.',inline = False)
+    embed.add_field(name = 'Dark Shroom legendhelp ',value ='Explains all the commands which are usable by Mushronins legend! (TBD)',inline = False)
     await client.send_message(author,embed=embed)
     await client.say('Check ur DMs!')
 	
@@ -183,8 +172,7 @@ async def help(ctx):
 @commands.has_role("Mushronin's Commander")
 async def commanderhelp(ctx):
     author = ctx.message.author
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
+    embed = discord.Embed(color = 0x5c0587)
     embed.set_author(name='Officer Commands Help')
     embed.set_image(url = 'https://image.ibb.co/caM2BK/help.gif')
     embed.add_field(name = 'say(Admin permission required) ',value ='Use it like ``Mush say <text>``',inline = False)
@@ -209,8 +197,7 @@ async def commanderhelp(ctx):
 @client.command(pass_context = True)
 async def generalhelp(ctx):
     author = ctx.message.author
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
+    embed = discord.Embed(color = 0x5c0587)
     embed.add_field(name = 'poll ',value ='Use it like ``Mush poll "Question" "Option1" "Option2" ..... "Option9"``.',inline = False)
     embed.add_field(name = 'guess ',value ='To play guess game use ``Mush guess <number> and number should be between 1-10``',inline = False)
     embed.add_field(name = 'ownerinfo ',value ='To get basic information about owner.',inline = False)
@@ -225,7 +212,7 @@ async def invite(ctx):
         embed=discord.Embed(title="You can invite me using this link!", description="https://discordapp.com/api/oauth2/authorize?client_id=474575162424033280&permissions=8&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D474575162424033280%26permissions%3D8%26redirect_uri%3Dhttps%253A%252F%252Fdiscordapp.com%252Fapi%252Foauth2%252Fauthorize%253Fclient_id%253D&scope=bot", color=0x000000)
         await client.say(embed=embed)
      else:
-        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x000000)
+        embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x5c0587)
         await client.say(embed=embed)
          
 
@@ -429,8 +416,7 @@ async def serverinfo(ctx):
     roles = ', '.join(roles);
     channelz = len(server.channels);
     time = str(server.created_at); time = time.split(' '); time= time[0];
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    join = discord.Embed(description= '%s '%(str(server)),title = 'Server Name', color = discord.Color((r << 16) + (g << 8) + b));
+    join = discord.Embed(description= '%s '%(str(server)),title = 'Server Name', color = 0x5c0587);
     join.set_thumbnail(url = server.icon_url);
     join.add_field(name = '__Owner__', value = str(server.owner) + '\n' + server.owner.id);
     join.add_field(name = '__ID__', value = str(server.id))
@@ -502,8 +488,7 @@ async def membercount(ctx, *args):
                         "Created:   %s\n" \
                         "" % (membs, membs_on, users, users_on, bots, bots_on, created)
 
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-    color = discord.Color((r << 16) + (g << 8) + b)
+    color = 0x5c0587
     await client.send_message(ctx.message.channel, embed=em(color = color, description=em.description))
     await client.delete_message(ctx.message)
 	
@@ -514,9 +499,8 @@ async def embed(ctx, *args):
     Sending embeded messages with color (and maby later title, footer and fields)
     """
     argstr = " ".join(args)
-    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
     text = argstr
-    color = discord.Color((r << 16) + (g << 8) + b)
+    color = 0x5c0587
     await client.send_message(ctx.message.channel, embed=Embed(color = color, description=text))
     await client.delete_message(ctx.message)
 
