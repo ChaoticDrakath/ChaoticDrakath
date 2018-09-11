@@ -92,6 +92,12 @@ async def support(ctx, *, msg=None):
     return
 
 @client.command(pass_context = True)
+async def wiki(ctx, *, msg = None):
+    if not msg: await client.say("Please specify respo. ``Format- http://aq-3d.wikidot.com/``")
+    else: await client.say('http://aq-3d.wikidot.com/' + msg)
+    return
+
+@client.command(pass_context = True)
 @commands.has_permissions(kick_members=True)     
 async def userinfo(ctx, user: discord.Member):
     embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color = 0x5c0587)
