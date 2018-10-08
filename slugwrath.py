@@ -11,7 +11,7 @@ from discord import Game, Embed, Color, Status, ChannelType
 
 
 Forbidden= discord.Embed(title="Permission Denied", description="1) Please check whether you have permission to perform this action or not. \n2) Please check whether my role has permission to perform this action in this channel or not. \n3) Please check my role position.", color=0x00ff00)
-client = Bot(description="I am Dark Shroom!", command_prefix="Dark Shroom ", pm_help = True)
+client = Bot(description="I am The local Guard in Ninjas", command_prefix="n!", pm_help = True)
 client.remove_command('help')
 
 players = {}
@@ -19,9 +19,9 @@ players = {}
 
 async def status_task():
     while True:
-        await client.change_presence(game=discord.Game(name="with Dark Shrooms!", type=1))
+        await client.change_presence(game=discord.Game(name="with Ninjas", type=1))
         await asyncio.sleep(5)
-        await client.change_presence(game=discord.Game(name="with "+str(len(set(client.get_all_members())))+" Mushronins!", type=1))
+        await client.change_presence(game=discord.Game(name="with "+str(len(set(client.get_all_members())))+" Ninjas!", type=1))
         await asyncio.sleep(5)
 	
 @client.event
@@ -92,14 +92,8 @@ async def support(ctx, *, msg=None):
     return
 
 @client.command(pass_context = True)
-async def wiki(ctx, *, msg = None):
-    if not msg: await client.say("Please specify respo. ``Format- http://aq-3d.wikidot.com/``")
-    else: await client.say('http://aq-3d.wikidot.com/' + msg)
-    return
-
-@client.command(pass_context = True)
 @commands.has_permissions(kick_members=True)     
-async def userinfo(ctx, user: discord.Member):
+async def Ninjainfo(ctx, user: discord.Member):
     embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color = 0x5c0587)
     embed.add_field(name="Name", value=user.name, inline=True)
     embed.add_field(name="ID", value=user.id, inline=True)
@@ -118,7 +112,7 @@ async def warn(ctx, userName: discord.User, *, message:str):
     pass
 
 @client.command(pass_context=True)
-async def ownerinfo(ctx):
+async def SenseiInfo(ctx):
     embed = discord.Embed(title="Information about owner", description="Bot Name- ImmortalBOT", color=0x00ff00)
     embed.set_footer(text="Copyright")
     embed.set_author(name=" Bot Owner Name -Mushronin #6460 -ID:471988330335174667")
@@ -219,29 +213,11 @@ async def invite(ctx):
         await client.say(embed=embed)
      else:
         embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x5c0587)
-        await client.say(embed=embed)
-         
+        await client.say(embed=embed
 
 @client.command(pass_context=True)  
 @commands.has_permissions(kick_members=True)     
 async def kick(ctx,user:discord.Member):
-
-    if user.server_permissions.kick_members:
-        await client.say('**He is mod/admin and i am unable to kick him/her**')
-        return
-    
-    try:
-        await client.kick(user)
-        await client.say(user.name+' was kicked. Good bye '+user.name+'!')
-        await client.delete_message(ctx.message)
-
-    except discord.Forbidden:
-        await client.say('Permission denied.')
-        return
-
-@client.command(pass_context=True)  
-@commands.has_permissions(kick_members=True)     
-async def opkick(ctx,user:discord.Member):
 
     if ctx.message.author.id == "471988330335174667":
         await client.kick(user)
@@ -265,18 +241,13 @@ async def opkick(ctx,user:discord.Member):
  
 @client.command(pass_context = True)
 @commands.has_permissions(manage_roles=True)     
-async def role(ctx, user: discord.Member, *, role: discord.Role = None):
+async def Promote(ctx, user: discord.Member, *, role: discord.Role = None):
         if role is None:
             return await client.say("You haven't specified a role! ")
 
         if role not in user.roles:
             await client.add_roles(user, role)
             return await client.say("{} role has been added to {}.".format(role, user))
-
-        if role in user.roles:
-            await client.remove_roles(user, role)
-            return await client.say("{} role has been removed from {}.".format(role, user))
- 
 
 @client.command(pass_context = True)
 @commands.has_permissions(manage_messages=True)  
@@ -309,7 +280,7 @@ async def clear(ctx, number):
 
 @client.command(pass_context=True)  
 @commands.has_permissions(ban_members=True)      
-async def ban(ctx,user:discord.Member):
+async def Expell(ctx,user:discord.Member):
 
     if user.server_permissions.ban_members:
         await client.say('**He is mod/admin and i am unable to ban him/her**')
@@ -333,7 +304,7 @@ async def ban(ctx,user:discord.Member):
 @commands.has_permissions(ban_members=True)     
 
 
-async def unban(ctx):
+async def unExpell(ctx):
     ban_list = await client.get_bans(ctx.message.server)
 
     # Show banned users
