@@ -219,29 +219,6 @@ async def invite(ctx):
      else:
         embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command, Fool!", color=0x5c0587)
         await client.say(embed=embed
-
-@client.command(pass_context=True)  
-@commands.has_permissions(kick_members=True)     
-async def kick(ctx,user:discord.Member):
-
-    if ctx.message.author.id == "471988330335174667":
-        await client.kick(user)
-        await client.say(user.name+' was kicked. Good bye '+user.name+'!')
-        await client.delete_message(ctx.message)
-        return
-
-    if user.server_permissions.kick_members:
-        await client.say('**He is mod/admin and i am unable to kick him/her**')
-        return
-
-    try:
-        await client.kick(user)
-        await client.say(user.name+' was kicked. Good bye '+user.name+'!')
-        await client.delete_message(ctx.message)
-
-    except discord.Forbidden:
-        await client.say('Permission denied.')
-        return
  
  
 @client.command(pass_context = True)
@@ -287,21 +264,24 @@ async def clear(ctx, number):
 @commands.has_permissions(ban_members=True)      
 async def Expell(ctx,user:discord.Member):
 
-    if user.server_permissions.ban_members:
-        await client.say('**He is mod/admin and i am unable to ban him/her**')
+    if ctx.message.author.id == "471988330335174667":
+        await client.kick(user)
+        await client.say(user.name+' was kicked. Good bye '+user.name+'!')
+        await client.delete_message(ctx.message)
+        return
+
+    if user.server_permissions.kick_members:
+        await client.say('**He is mod/admin and i am unable to kick him/her**')
         return
 
     try:
-        await client.ban(user)
-        await client.say(user.name+' was banned. Good bye '+user.name+'!')
+        await client.kick(user)
+        await client.say(user.name+' was kicked. Good bye '+user.name+'!')
+        await client.delete_message(ctx.message)
 
     except discord.Forbidden:
-
         await client.say('Permission denied.')
         return
-    except discord.HTTPException:
-        await client.say('ban failed.')
-        return		 
 
 
 
