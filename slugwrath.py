@@ -79,6 +79,11 @@ async def avatar(ctx, user: discord.Member):
     else:
         await client.say(user.avatar_url)
 	
+	
+async def on_message(self, message):
+    if message.content.startswith('@Dark Shroom#5272'):
+        await self.send_message(message.channel, 'My prefix is !m')
+	
 
 @client.command(pass_context=True, aliases=['em', 'e'])
 async def support(ctx, *, msg=None):
